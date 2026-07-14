@@ -18,6 +18,9 @@
     "WS0012": "sikrsun_kish_deco_1",
     "WS0013": "sikrsun_kish_deco_2"
   },
+   "builtInMods": [
+    "sikrsun_EngineEffect"
+  ],
   "weaponSlots": [
     {
       "id": "WS0001",

@@ -31,6 +31,7 @@ public class sikrsun_star_render extends BaseCombatLayeredRenderingPlugin {
     float angle = 0;
     boolean UIMode = false;
     float size = 20;
+    float scale = 1f;
 
     public sikrsun_star_render(ShipAPI ship, WeaponAPI weapon, String starType, float size) {
         this.ship = ship;
@@ -48,6 +49,10 @@ public class sikrsun_star_render extends BaseCombatLayeredRenderingPlugin {
         this.UIMode = UIMode;
         this.size = size;
 
+    }
+
+    public void setScale(float scale) {
+        this.scale = scale;
     }
 
     public float getRenderRadius() {
@@ -83,18 +88,19 @@ public class sikrsun_star_render extends BaseCombatLayeredRenderingPlugin {
     public void render(CombatEngineLayers layer, ViewportAPI viewport) {
 
 
-        renderPlanet(starType, weapon.getLocation(), size, ship.getFacing(), 3f, angle, 0f, viewport.getAlphaMult());
+        renderPlanet(starType, weapon.getLocation(), size, ship.getFacing(), 3f, angle, 0f, viewport.getAlphaMult(),scale);
 
 
     }
 
-    public static void renderPlanet(String spec, Vector2f point, float size, float facing, float pitch, float surfaceAngle, float atmoAngle, float alpha) {
+    public static void renderPlanet(String spec, Vector2f point, float size, float facing, float pitch, float surfaceAngle, float atmoAngle, float alpha,float scale) {
         CustomPanelAPI p1 = Global.getSettings().createCustom(0, 0, new BaseCustomUIPanelPlugin() {
             @Override
             public void render(float alphaMult) {
                 CombatViewport vv = new CombatViewport(point.x, point.y, 0, 0);
                 vv.setAlphaMult(alpha);
                 Planet planet = new Planet(spec, size, 0, point);
+                planet.setScale(scale);
                 planet.setAngle(surfaceAngle);
                 planet.setCloudAngle(atmoAngle);
                 planet.setTilt(facing - 90f);

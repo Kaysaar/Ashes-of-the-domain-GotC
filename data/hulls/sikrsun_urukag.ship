@@ -14,6 +14,9 @@
   "builtInWeapons": {
     "WS0009": "sikrsun_glow_medium_0"
   },
+   "builtInMods": [
+    "sikrsun_EngineEffect"
+  ],
   "weaponSlots": [
     {
       "id": "WS0001",

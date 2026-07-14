@@ -39,6 +39,7 @@ public class RefitScreenSunInserter implements EveryFrameScript {
                     ShipAPI ship = (ShipAPI) ReflectionUtilis.invokeMethodWithAutoProjection("getShip",shipDisplay);
                     if(ship!=null&&intercepter==null){
                         intercepter = new RefitScreenZoomIntercepter(1,1,ship,shipDisplay);
+                        RefitScreenSunInserter.lastSavedZoom = 1f;
                         refitPanel.addComponent(intercepter.getMainPanel()).inTL(0,0);
                     }
                     WeaponAPI weapon = ship.getAllWeapons().stream().filter(x->x.getSlot().getId().equals("SUN")).findFirst().orElse(null);
@@ -72,7 +73,6 @@ public class RefitScreenSunInserter implements EveryFrameScript {
         else{
             intercepter = null;
             haveSavedStatusOfZoom  = false;
-            lastSavedZoom = 1f;
             lastSaved = null;
             render= null;
         }

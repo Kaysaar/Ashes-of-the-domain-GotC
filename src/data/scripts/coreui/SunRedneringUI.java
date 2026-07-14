@@ -11,6 +11,8 @@ import com.fs.starfarer.api.ui.PositionAPI;
 import com.fs.starfarer.api.ui.UIPanelAPI;
 import com.fs.starfarer.combat.CombatViewport;
 import com.fs.starfarer.combat.entities.terrain.Planet;
+import data.scripts.effects.stareffect.StarCombatRenderingData;
+import data.scripts.effects.stareffect.StarCombatRenderingManager;
 import data.scripts.reflection.ReflectionUtilis;
 import data.scripts.weapons.sikrsun_star_render;
 import org.lwjgl.opengl.GL11;
@@ -41,7 +43,11 @@ public class SunRedneringUI implements CustomUIPanelPlugin {
         float spriteCenterY = ship.getSpriteAPI().getCenterY()-ship.getSpriteAPI().getHeight()/2;
         spriteCenterXField = ReflectionUtilis.getFloatFieldNameMatchingValue(shipPanel,spriteCenterX);
         spriteCenterYField = ReflectionUtilis.getFloatFieldNameMatchingValue(shipPanel,spriteCenterY);
-        ren = new sikrsun_star_render(ship,weapon,"star_yellow",true,20);
+        StarCombatRenderingData data = StarCombatRenderingManager.getDataFromList(weapon.getShip().getHullSpec().getHullId());
+        if(data.getStarSlotData(weapon.getSlot().getId())!=null){
+            ren = new sikrsun_star_render(ship,weapon,"star_yellow",true,data.getStarSlotData(weapon.getSlot().getId()).starSize);
+        }
+
         
     }
     @Override
@@ -58,9 +64,9 @@ public class SunRedneringUI implements CustomUIPanelPlugin {
     @Override
     public void render(float alphaMult) {
         GL11.glPushMatrix();
-        
-        
-      
+
+
+
         GL11.glTranslatef((float)Math.round(shipPanel.getPosition().getCenterX() + (float)ReflectionUtilis.getPrivateVariable(spriteCenterXField,shipPanel) * RefitScreenSunInserter.lastSavedZoom ), (float)Math.round(shipPanel.getPosition().getCenterY() +(float)ReflectionUtilis.getPrivateVariable(spriteCenterYField,shipPanel)  * RefitScreenSunInserter.lastSavedZoom ), 0.0F);
         GL11.glScalef(RefitScreenSunInserter.lastSavedZoom, RefitScreenSunInserter.lastSavedZoom, 1.0F);
         for (CombatEngineLayers activeLayer : ship.getActiveLayers()) {

@@ -15,6 +15,9 @@
     "COVER0": "sikrsun_sippar_deco",
     "WS0010": "sikrsun_glow_medium_0"
   },
+   "builtInMods": [
+    "sikrsun_EngineEffect"
+  ],
   "weaponSlots": [
     {
       "id": "WS0001",
