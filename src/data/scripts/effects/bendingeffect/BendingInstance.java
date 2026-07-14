@@ -12,18 +12,27 @@ public class BendingInstance {
     private float radius;
     private float halfSize = 64f;
 
-    private float centerXOffset = 0f;
-    private float centerYOffset = 0f;
+    private float centerXOffset;
+    private float centerYOffset;
 
-    private Vector2f referencePoint = new Vector2f(0f, 0f);
+    private Vector2f referencePoint =
+            new Vector2f(0f, 0f);
 
-    private boolean remove = false;
+    private boolean remove;
+    private boolean needsBackBufferUpdate;
 
     private float strength;
+    private float currStrength = 0.04f;
     private float minStrength = 0.05f;
-    private float currStrength = 0.05f;
 
     private ShipAPI ship;
+
+    /*
+     * Cached world-space center. Recalculated whenever visibility,
+     * overlap, or rendering is checked.
+     */
+    private float actualCenterX;
+    private float actualCenterY;
 
     public BendingInstance() {
         this(128f);
@@ -40,103 +49,94 @@ public class BendingInstance {
      * @param size     width and height of the effect square in world units
      * @param strength distortion strength
      */
-    public BendingInstance(float size, float strength) {
+    public BendingInstance(
+            float size,
+            float strength
+    ) {
         this(size, strength, 0.1f);
     }
 
     /**
      * @param size     width and height of the effect square in world units
      * @param strength distortion strength
-     * @param radius   black-hole radius; 0.5 makes the circle touch the edges
+     * @param radius   inner radius of the effect
      */
-    public BendingInstance(float size, float strength, float radius) {
+    public BendingInstance(
+            float size,
+            float strength,
+            float radius
+    ) {
         this.halfSize = size / 2f;
         this.strength = strength;
         this.radius = radius;
         this.currStrength = minStrength;
     }
 
+    /**
+     * Retained for compatibility with any code that renders an instance
+     * directly rather than through BendingEffectHandler.
+     */
     public void render(
             ViewportAPI viewport,
             ShaderUniformManager manager
     ) {
-        if (viewport == null || manager == null) {
+        float screenWidth =
+                Global.getSettings().getScreenWidthPixels();
+
+        float screenHeight =
+                Global.getSettings().getScreenHeightPixels();
+
+        render(
+                viewport,
+                manager,
+                screenWidth,
+                screenHeight
+        );
+    }
+
+    /**
+     * Optimized rendering path used by BendingEffectHandler.
+     */
+    public void render(
+            ViewportAPI viewport,
+            ShaderUniformManager manager,
+            float screenWidth,
+            float screenHeight
+    ) {
+        if (viewport == null
+                || manager == null
+                || screenWidth <= 0f
+                || screenHeight <= 0f) {
             return;
         }
 
-        float actualCenterX = referencePoint.x;
-        float actualCenterY = referencePoint.y;
-
-        if (ship != null) {
-            float radians = (float) Math.toRadians(ship.getFacing() - 90f);
-
-            float cos = (float) Math.cos(radians);
-            float sin = (float) Math.sin(radians);
-
-            float rotatedX =
-                    centerXOffset * cos
-                            - centerYOffset * sin;
-
-            float rotatedY =
-                    centerXOffset * sin
-                            + centerYOffset * cos;
-
-            actualCenterX += rotatedX;
-            actualCenterY += rotatedY;
-        } else {
-            actualCenterX += centerXOffset;
-            actualCenterY += centerYOffset;
-        }
+        updateActualCenter();
 
         float x = actualCenterX - halfSize;
         float y = actualCenterY - halfSize;
+
         float xe = actualCenterX + halfSize;
         float ye = actualCenterY + halfSize;
 
-        float windowWidth =
-                Global.getSettings().getScreenWidthPixels();
-
-        float windowHeight =
-                Global.getSettings().getScreenHeightPixels();
-
-        if (windowWidth <= 0f || windowHeight <= 0f) {
-            return;
-        }
-
-        float screenLeft =
-                viewport.convertWorldXtoScreenX(x);
-
-        float screenBottom =
-                viewport.convertWorldYtoScreenY(y);
-
-        float screenRight =
-                viewport.convertWorldXtoScreenX(xe);
-
-        float screenTop =
-                viewport.convertWorldYtoScreenY(ye);
-
         /*
-         * Do not render instances that are completely outside the screen.
-         *
-         * Partially visible instances are still rendered and OpenGL clips
-         * their geometry normally.
+         * Each UV must correspond to the vertex carrying the matching
+         * local texture coordinate.
          */
-        if (screenRight <= 0f
-                || screenLeft >= windowWidth
-                || screenTop <= 0f
-                || screenBottom >= windowHeight) {
-            return;
-        }
+        float left =
+                viewport.convertWorldXtoScreenX(x)
+                        / screenWidth;
 
-        /*
-         * These are screen/framebuffer UV coordinates.
-         *
-         * Height must be normalized using screen height, not width.
-         */
-        float left = screenLeft / windowWidth;
-        float bottom = screenBottom / windowHeight;
-        float right = screenRight / windowWidth;
-        float top = screenTop / windowHeight;
+        float lower =
+                viewport.convertWorldYtoScreenY(y)
+                        / screenHeight;
+
+        float right =
+                viewport.convertWorldXtoScreenX(xe)
+                        / screenWidth;
+
+        float upper =
+                viewport.convertWorldYtoScreenY(ye)
+                        / screenHeight;
 
         updateCurrentStrength();
 
@@ -145,21 +145,19 @@ public class BendingInstance {
                 .setFloat("radius", radius)
                 .setVector2(
                         "minUV",
-                        new Vector2f(left, bottom)
+                        new Vector2f(left, lower)
                 )
                 .setVector2(
                         "maxUV",
-                        new Vector2f(right, top)
-                )
-                .setVector2(
-                        "texelSize",
-                        new Vector2f(
-                                1f / windowWidth,
-                                1f / windowHeight
-                        )
+                        new Vector2f(right, upper)
                 );
 
-        GL11.glColor4f(1f, 1f, 1f, 1f);
+        GL11.glColor4f(
+                1f,
+                1f,
+                1f,
+                1f
+        );
 
         GL11.glBegin(GL11.GL_TRIANGLE_STRIP);
 
@@ -178,27 +176,140 @@ public class BendingInstance {
         GL11.glEnd();
     }
 
+    /**
+     * Checks whether any part of this effect quad is currently visible.
+     */
+    public boolean isVisible(
+            ViewportAPI viewport,
+            float screenWidth,
+            float screenHeight
+    ) {
+        if (viewport == null
+                || screenWidth <= 0f
+                || screenHeight <= 0f) {
+            return false;
+        }
+
+        updateActualCenter();
+
+        float x = actualCenterX - halfSize;
+        float y = actualCenterY - halfSize;
+
+        float xe = actualCenterX + halfSize;
+        float ye = actualCenterY + halfSize;
+
+        float screenX1 =
+                viewport.convertWorldXtoScreenX(x);
+
+        float screenX2 =
+                viewport.convertWorldXtoScreenX(xe);
+
+        float screenY1 =
+                viewport.convertWorldYtoScreenY(y);
+
+        float screenY2 =
+                viewport.convertWorldYtoScreenY(ye);
+
+        float screenLeft =
+                Math.min(screenX1, screenX2);
+
+        float screenRight =
+                Math.max(screenX1, screenX2);
+
+        float screenBottom =
+                Math.min(screenY1, screenY2);
+
+        float screenTop =
+                Math.max(screenY1, screenY2);
+
+        return screenRight >= 0f
+                && screenLeft <= screenWidth
+                && screenTop >= 0f
+                && screenBottom <= screenHeight;
+    }
+
+    /**
+     * Determines whether the circular areas of two bending instances
+     * overlap in world space.
+     *
+     * When they overlap, the later effect should receive an updated
+     * framebuffer so it can bend the result of the earlier effect.
+     */
+    public boolean overlaps(BendingInstance other) {
+        if (other == null || other == this) {
+            return false;
+        }
+
+        updateActualCenter();
+        other.updateActualCenter();
+
+        float differenceX =
+                actualCenterX - other.actualCenterX;
+
+        float differenceY =
+                actualCenterY - other.actualCenterY;
+
+        float combinedRadius =
+                halfSize + other.halfSize;
+
+        return differenceX * differenceX
+                + differenceY * differenceY
+                <= combinedRadius * combinedRadius;
+    }
+
+    private void updateActualCenter() {
+        if (ship != null && ship.getLocation() != null) {
+            actualCenterX = ship.getLocation().x;
+            actualCenterY = ship.getLocation().y;
+
+            float radians = (float) Math.toRadians(
+                    ship.getFacing() - 90f
+            );
+
+            float cosine = (float) Math.cos(radians);
+            float sine = (float) Math.sin(radians);
+
+            float rotatedX =
+                    centerXOffset * cosine
+                            - centerYOffset * sine;
+
+            float rotatedY =
+                    centerXOffset * sine
+                            + centerYOffset * cosine;
+
+            actualCenterX += rotatedX;
+            actualCenterY += rotatedY;
+
+            return;
+        }
+
+        actualCenterX =
+                referencePoint.x + centerXOffset;
+
+        actualCenterY =
+                referencePoint.y + centerYOffset;
+    }
+
     private void updateCurrentStrength() {
         float targetStrength;
 
-        if (ship == null || ship.getEngineController() == null) {
+        if (ship == null
+                || ship.getEngineController() == null
+                || !ship.getEngineController().isIdle()) {
             targetStrength = strength;
-        } else if (ship.getEngineController().isIdle()) {
-            targetStrength = minStrength;
         } else {
-            targetStrength = strength;
+            targetStrength = minStrength;
         }
 
-        float changeSpeed =
-                Math.max(
-                        Math.abs(strength - minStrength) * 0.01f,
-                        0.0001f
-                );
+        float maximumChange = Math.max(
+                Math.abs(strength) * 0.01f,
+                0.0001f
+        );
 
         currStrength = moveTowards(
                 currStrength,
                 targetStrength,
-                changeSpeed
+                maximumChange
         );
     }
 
@@ -208,11 +319,17 @@ public class BendingInstance {
             float maximumChange
     ) {
         if (current < target) {
-            return Math.min(current + maximumChange, target);
+            return Math.min(
+                    current + maximumChange,
+                    target
+            );
         }
 
         if (current > target) {
-            return Math.max(current - maximumChange, target);
+            return Math.max(
+                    current - maximumChange,
+                    target
+            );
         }
 
         return target;
@@ -238,7 +355,11 @@ public class BendingInstance {
     }
 
     public BendingInstance setSize(float size) {
-        this.halfSize = size / 2f;
+        this.halfSize = Math.max(
+                0f,
+                size / 2f
+        );
+
         return this;
     }
 
@@ -247,13 +368,8 @@ public class BendingInstance {
         return this;
     }
 
-    public BendingInstance setMinStrength(float strength) {
-        this.minStrength = strength;
-
-        if (currStrength < minStrength) {
-            currStrength = minStrength;
-        }
-
+    public BendingInstance setMinStrength(float minStrength) {
+        this.minStrength = minStrength;
         return this;
     }
 
@@ -262,10 +378,28 @@ public class BendingInstance {
         return this;
     }
 
+    /**
+     * Forces this instance to capture the framebuffer again before
+     * rendering. Automatic overlap detection normally makes this
+     * unnecessary, but the method remains available for special cases.
+     */
+    public BendingInstance setNeedsBackBufferUpdate(
+            boolean needsBackBufferUpdate
+    ) {
+        this.needsBackBufferUpdate =
+                needsBackBufferUpdate;
+
+        return this;
+    }
+
+    public boolean needsBackBufferUpdate() {
+        return needsBackBufferUpdate;
+    }
+
     public BendingInstance setShip(ShipAPI ship) {
         this.ship = ship;
 
-        if (ship != null) {
+        if (ship != null && ship.getLocation() != null) {
             setReferencePoint(ship.getLocation());
         }
 
@@ -273,12 +407,9 @@ public class BendingInstance {
     }
 
     public void dispose() {
-        this.remove = true;
+        remove = true;
     }
 
-    /**
-     * This is a question, not a statement.
-     */
     public boolean shouldRemove() {
         return remove;
     }

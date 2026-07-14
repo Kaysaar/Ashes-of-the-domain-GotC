@@ -28,6 +28,15 @@ public class BendingEffectHandler
     private final List<BendingInstance> instances =
             new ArrayList<>();
 
+    /*
+     * Reused lists prevent new ArrayList allocations every frame.
+     */
+    private final List<BendingInstance> visibleInstances =
+            new ArrayList<>();
+
+    private final List<BendingInstance> renderedInstances =
+            new ArrayList<>();
+
     private int windowWidth;
     private int windowHeight;
 
@@ -57,14 +66,16 @@ public class BendingEffectHandler
         windowWidth = Math.max(
                 1,
                 Math.round(
-                        Global.getSettings().getScreenWidthPixels()
+                        Global.getSettings()
+                                .getScreenWidthPixels()
                 )
         );
 
         windowHeight = Math.max(
                 1,
                 Math.round(
-                        Global.getSettings().getScreenHeightPixels()
+                        Global.getSettings()
+                                .getScreenHeightPixels()
                 )
         );
     }
@@ -125,31 +136,38 @@ public class BendingEffectHandler
         int error = GL11.glGetError();
 
         if (error != GL11.GL_NO_ERROR) {
-            Global.getLogger(BendingEffectHandler.class).log(
+            Global.getLogger(
+                    BendingEffectHandler.class
+            ).log(
                     Level.ERROR,
                     new OpenGLException(
-                            "Could not create bending framebuffer texture. "
-                                    + "OpenGL error: "
+                            "Could not create bending framebuffer "
+                                    + "texture. OpenGL error: "
                                     + error
                     )
             );
         }
 
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+        GL11.glBindTexture(
+                GL11.GL_TEXTURE_2D,
+                0
+        );
     }
 
     private void ensureCorrectTextureSize() {
         int currentWidth = Math.max(
                 1,
                 Math.round(
-                        Global.getSettings().getScreenWidthPixels()
+                        Global.getSettings()
+                                .getScreenWidthPixels()
                 )
         );
 
         int currentHeight = Math.max(
                 1,
                 Math.round(
-                        Global.getSettings().getScreenHeightPixels()
+                        Global.getSettings()
+                                .getScreenHeightPixels()
                 )
         );
 
@@ -166,13 +184,17 @@ public class BendingEffectHandler
 
     private void clearOpenGLErrors() {
         while (GL11.glGetError() != GL11.GL_NO_ERROR) {
-            // Clear existing OpenGL errors.
+            // Clear all previously queued OpenGL errors.
         }
     }
 
     @Override
     public void advance(float amount) {
-        instances.removeIf(BendingInstance::shouldRemove);
+        instances.removeIf(
+                instance ->
+                        instance == null
+                                || instance.shouldRemove()
+        );
     }
 
     @Override
@@ -181,16 +203,23 @@ public class BendingEffectHandler
             ViewportAPI viewport
     ) {
         if (instances.isEmpty()
+                || viewport == null
                 || shader == null
                 || screenTextureID == -1) {
             return;
         }
 
         ensureCorrectTextureSize();
+        collectVisibleInstances(viewport);
 
         /*
-         * Save all OpenGL states changed by this effect.
+         * Avoid even copying the framebuffer when every effect is
+         * outside the viewport.
          */
+        if (visibleInstances.isEmpty()) {
+            return;
+        }
+
         GL11.glPushAttrib(
                 GL11.GL_ENABLE_BIT
                         | GL11.GL_TEXTURE_BIT
@@ -202,28 +231,19 @@ public class BendingEffectHandler
 
         try {
             /*
-             * Capture once before drawing any bending instances.
+             * Base capture used by every visible instance that does not
+             * need to see a previously rendered bending effect.
              */
             updateTexture();
 
             GL11.glEnable(GL11.GL_TEXTURE_2D);
 
-            /*
-             * The shader now outputs:
-             *
-             * alpha = 0 outside the effect
-             * alpha = 0..1 along the fading edge
-             * alpha = 1 near the center
-             */
             GL11.glEnable(GL11.GL_BLEND);
             GL11.glBlendFunc(
                     GL11.GL_SRC_ALPHA,
                     GL11.GL_ONE_MINUS_SRC_ALPHA
             );
 
-            /*
-             * Alpha testing could cut off the smooth fade.
-             */
             GL11.glDisable(GL11.GL_ALPHA_TEST);
 
             GL11.glColor4f(
@@ -252,18 +272,37 @@ public class BendingEffectHandler
                             )
                     );
 
-            for (BendingInstance instance : instances) {
+            renderedInstances.clear();
+
+            for (BendingInstance instance
+                    : visibleInstances) {
+
+                /*
+                 * The initial framebuffer capture is already sufficient
+                 * for the first visible instance.
+                 */
+                if (!renderedInstances.isEmpty()
+                        && requiresNewBackBuffer(instance)) {
+                    updateTexture();
+                }
+
                 instance.render(
                         viewport,
-                        manager
+                        manager,
+                        windowWidth,
+                        windowHeight
                 );
+
+                renderedInstances.add(instance);
             }
         } finally {
             if (shader != null) {
                 shader.unbind();
             }
 
-            GL13.glActiveTexture(GL13.GL_TEXTURE0);
+            GL13.glActiveTexture(
+                    GL13.GL_TEXTURE0
+            );
 
             GL11.glBindTexture(
                     GL11.GL_TEXTURE_2D,
@@ -272,9 +311,58 @@ public class BendingEffectHandler
 
             GL11.glPopMatrix();
             GL11.glPopAttrib();
+
+            renderedInstances.clear();
         }
     }
 
+    private void collectVisibleInstances(
+            ViewportAPI viewport
+    ) {
+        visibleInstances.clear();
+
+        for (BendingInstance instance : instances) {
+            if (instance == null
+                    || instance.shouldRemove()) {
+                continue;
+            }
+
+            if (instance.isVisible(
+                    viewport,
+                    windowWidth,
+                    windowHeight
+            )) {
+                visibleInstances.add(instance);
+            }
+        }
+    }
+
+    /**
+     * A new framebuffer capture is needed when explicitly requested or
+     * when this effect overlaps an effect already rendered this frame.
+     */
+    private boolean requiresNewBackBuffer(
+            BendingInstance instance
+    ) {
+        if (instance.needsBackBufferUpdate()) {
+            return true;
+        }
+
+        for (BendingInstance renderedInstance
+                : renderedInstances) {
+
+            if (instance.overlaps(renderedInstance)) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Captures the current framebuffer into the texture sampled by the
+     * bending shader.
+     */
     private void updateTexture() {
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
 
@@ -308,11 +396,14 @@ public class BendingEffectHandler
     public BendingEffectHandler addInstances(
             List<BendingInstance> newInstances
     ) {
-        if (newInstances == null) {
+        if (newInstances == null
+                || newInstances.isEmpty()) {
             return this;
         }
 
-        for (BendingInstance instance : newInstances) {
+        for (BendingInstance instance
+                : newInstances) {
+
             if (instance != null) {
                 instances.add(instance);
             }
@@ -323,10 +414,14 @@ public class BendingEffectHandler
 
     public void dispose() {
         for (BendingInstance instance : instances) {
-            instance.dispose();
+            if (instance != null) {
+                instance.dispose();
+            }
         }
 
         instances.clear();
+        visibleInstances.clear();
+        renderedInstances.clear();
 
         if (screenTextureID != -1) {
             GL11.glDeleteTextures(screenTextureID);

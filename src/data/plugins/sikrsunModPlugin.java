@@ -2,6 +2,7 @@ package data.plugins;
 
 import com.fs.starfarer.api.BaseModPlugin;
 import com.fs.starfarer.api.Global;
+import data.scripts.coreui.CoreUIListener;
 import data.scripts.coreui.RefitScreenSunInserter;
 import data.scripts.effects.EffectsInitializer;
 import data.scripts.effects.bendingeffect.BendingEffectDataHandler;
@@ -18,6 +19,7 @@ public class sikrsunModPlugin extends BaseModPlugin { //very basic mod plugin us
         Global.getSector().addTransientScript(new RefitScreenSunInserter());
         BendingEffectDataHandler.loadData();
         StarCombatRenderingManager.loadData();
+        Global.getSector().getListenerManager().addListener(new CoreUIListener(),true);
 //        Global.getSector().addTransientScript(new EffectsInitializer());
 //        Global.getCombatEngine().addPlugin(new EffectsInitializer());
     }

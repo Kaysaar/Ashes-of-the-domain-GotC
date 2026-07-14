@@ -1,12 +1,11 @@
 package data.hullmods;
 
-import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;
 import data.scripts.effects.EffectsInitializer;
+import data.scripts.effects.bendingeffect.BendingEffectDataHandler;
 import data.scripts.effects.bendingeffect.BendingInstance;
 import data.scripts.effects.bendingeffect.BendingShipEffectData;
-import data.scripts.effects.bendingeffect.BendingEffectDataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +13,10 @@ import java.util.List;
 public class SikrsunEngineEffect extends BaseHullMod {
 
     @Override
-    public void applyEffectsAfterShipAddedToCombatEngine(ShipAPI ship, String id) {
+    public void applyEffectsAfterShipAddedToCombatEngine(
+            ShipAPI ship,
+            String id
+    ) {
         if (ship == null || ship.getHullSpec() == null) {
             return;
         }
@@ -48,13 +50,15 @@ public class SikrsunEngineEffect extends BaseHullMod {
                             effectData.coordinates.y
                     )
                     .setRadius(effectData.radius)
-                    .setStrength(effectData.maxStrength);
+                    .setStrength(effectData.maxStrength).
+                    setNeedsBackBufferUpdate(true);
 
             instances.add(instance);
         }
 
         if (!instances.isEmpty()) {
-            EffectsInitializer.BendingEffectHandler.addInstances(instances);
+            EffectsInitializer.BendingEffectHandler
+                    .addInstances(instances);
         }
     }
 }
