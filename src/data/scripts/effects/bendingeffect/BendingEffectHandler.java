@@ -8,108 +8,335 @@ import data.scripts.effects.Shader;
 import data.scripts.effects.ShaderUniformManager;
 import org.apache.log4j.Level;
 import org.lwjgl.opengl.GL11;
+import org.lwjgl.opengl.GL12;
 import org.lwjgl.opengl.GL13;
 import org.lwjgl.opengl.OpenGLException;
 import org.lwjgl.util.vector.Vector2f;
 
-import javax.management.InstanceNotFoundException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.EnumSet;
 import java.util.List;
 
-public class BendingEffectHandler extends BaseCombatLayeredRenderingPlugin {
+public class BendingEffectHandler
+        extends BaseCombatLayeredRenderingPlugin {
 
     private int screenTextureID = -1;
-    private Shader shader = null;
-    private float t;
-    private List<BendingInstance> instances = new ArrayList<>();
+
+    private Shader shader;
+
+    private final List<BendingInstance> instances =
+            new ArrayList<>();
+
     private int windowWidth;
     private int windowHeight;
 
-    @Override
-    public EnumSet<CombatEngineLayers> getActiveLayers() {
-        return EnumSet.of(CombatEngineLayers.UNDER_SHIPS_LAYER);
-    }
-
-    private void initResources() {
-        windowWidth = (int) Global.getSettings().getScreenWidthPixels();
-        windowHeight = (int) Global.getSettings().getScreenWidthPixels();
-        GL11.glGetError(); // clear the error cache (you need to do this in a loop actually as its a stack, but 1 call is enough)
-        screenTextureID = GL11.glGenTextures();
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, screenTextureID);
-        GL11.glTexImage2D(GL11.GL_TEXTURE_2D, 0, GL11.GL_RGBA,
-                windowWidth, windowHeight, 0, GL11.GL_RGBA,
-                GL11.GL_UNSIGNED_BYTE, (java.nio.ByteBuffer) null);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MIN_FILTER, GL11.GL_LINEAR);
-        GL11.glTexParameteri(GL11.GL_TEXTURE_2D, GL11.GL_TEXTURE_MAG_FILTER, GL11.GL_LINEAR);
-        int err = GL11.glGetError();
-        if (err != GL11.GL_NO_ERROR) {
-            Global.getLogger(BendingInstance.class).log(Level.ERROR, new OpenGLException("Error after trying to create texture\n error: " + err));
-        }
-
-        shader = Shader.fromFile("data/vfx/shaders/main.vert", "data/vfx/shaders/bending.frag");
-    }
-
     public BendingEffectHandler() {
-        this.layer = CombatEngineLayers.ABOVE_SHIPS_AND_MISSILES_LAYER;
+        this.layer = CombatEngineLayers.UNDER_SHIPS_LAYER;
         initResources();
     }
 
     @Override
-    public void advance(float amount) {
-        t += amount;
-        this.instances.removeIf(BendingInstance::shouldRemove);
+    public EnumSet<CombatEngineLayers> getActiveLayers() {
+        return EnumSet.of(
+                CombatEngineLayers.UNDER_SHIPS_LAYER
+        );
+    }
+
+    private void initResources() {
+        updateWindowDimensions();
+        createScreenTexture();
+
+        shader = Shader.fromFile(
+                "data/vfx/shaders/main.vert",
+                "data/vfx/shaders/bending.frag"
+        );
+    }
+
+    private void updateWindowDimensions() {
+        windowWidth = Math.max(
+                1,
+                Math.round(
+                        Global.getSettings().getScreenWidthPixels()
+                )
+        );
+
+        windowHeight = Math.max(
+                1,
+                Math.round(
+                        Global.getSettings().getScreenHeightPixels()
+                )
+        );
+    }
+
+    private void createScreenTexture() {
+        if (screenTextureID != -1) {
+            GL11.glDeleteTextures(screenTextureID);
+            screenTextureID = -1;
+        }
+
+        clearOpenGLErrors();
+
+        screenTextureID = GL11.glGenTextures();
+
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+
+        GL11.glBindTexture(
+                GL11.GL_TEXTURE_2D,
+                screenTextureID
+        );
+
+        GL11.glTexImage2D(
+                GL11.GL_TEXTURE_2D,
+                0,
+                GL11.GL_RGBA,
+                windowWidth,
+                windowHeight,
+                0,
+                GL11.GL_RGBA,
+                GL11.GL_UNSIGNED_BYTE,
+                (ByteBuffer) null
+        );
+
+        GL11.glTexParameteri(
+                GL11.GL_TEXTURE_2D,
+                GL11.GL_TEXTURE_MIN_FILTER,
+                GL11.GL_LINEAR
+        );
+
+        GL11.glTexParameteri(
+                GL11.GL_TEXTURE_2D,
+                GL11.GL_TEXTURE_MAG_FILTER,
+                GL11.GL_LINEAR
+        );
+
+        GL11.glTexParameteri(
+                GL11.GL_TEXTURE_2D,
+                GL11.GL_TEXTURE_WRAP_S,
+                GL12.GL_CLAMP_TO_EDGE
+        );
+
+        GL11.glTexParameteri(
+                GL11.GL_TEXTURE_2D,
+                GL11.GL_TEXTURE_WRAP_T,
+                GL12.GL_CLAMP_TO_EDGE
+        );
+
+        int error = GL11.glGetError();
+
+        if (error != GL11.GL_NO_ERROR) {
+            Global.getLogger(BendingEffectHandler.class).log(
+                    Level.ERROR,
+                    new OpenGLException(
+                            "Could not create bending framebuffer texture. "
+                                    + "OpenGL error: "
+                                    + error
+                    )
+            );
+        }
+
+        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
+    }
+
+    private void ensureCorrectTextureSize() {
+        int currentWidth = Math.max(
+                1,
+                Math.round(
+                        Global.getSettings().getScreenWidthPixels()
+                )
+        );
+
+        int currentHeight = Math.max(
+                1,
+                Math.round(
+                        Global.getSettings().getScreenHeightPixels()
+                )
+        );
+
+        if (currentWidth == windowWidth
+                && currentHeight == windowHeight) {
+            return;
+        }
+
+        windowWidth = currentWidth;
+        windowHeight = currentHeight;
+
+        createScreenTexture();
+    }
+
+    private void clearOpenGLErrors() {
+        while (GL11.glGetError() != GL11.GL_NO_ERROR) {
+            // Clear existing OpenGL errors.
+        }
     }
 
     @Override
-    public void render(CombatEngineLayers layer, ViewportAPI viewport) {
-        GL11.glPushMatrix();
-
-        GL11.glEnable(GL11.GL_TEXTURE_2D);
-        shader.bind();
-        ShaderUniformManager manager = shader.getUniformManager();
-        manager // as opengl is a state machine, we dont need to constantly update this as it just stay as is
-                .setTexture("textureSampler", this.screenTextureID, GL13.GL_TEXTURE0);
-
-        for (BendingInstance instance : instances) {
-            updateTexture();
-            instance.render(viewport, manager);
-        }
-
-        GL11.glDisable(GL11.GL_TEXTURE_2D);
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, 0);
-        shader.unbind();
-
-        GL11.glPopMatrix();
+    public void advance(float amount) {
+        instances.removeIf(BendingInstance::shouldRemove);
     }
 
-    /// must be ran before rendering
+    @Override
+    public void render(
+            CombatEngineLayers layer,
+            ViewportAPI viewport
+    ) {
+        if (instances.isEmpty()
+                || shader == null
+                || screenTextureID == -1) {
+            return;
+        }
+
+        ensureCorrectTextureSize();
+
+        /*
+         * Save all OpenGL states changed by this effect.
+         */
+        GL11.glPushAttrib(
+                GL11.GL_ENABLE_BIT
+                        | GL11.GL_TEXTURE_BIT
+                        | GL11.GL_COLOR_BUFFER_BIT
+                        | GL11.GL_CURRENT_BIT
+        );
+
+        GL11.glPushMatrix();
+
+        try {
+            /*
+             * Capture once before drawing any bending instances.
+             */
+            updateTexture();
+
+            GL11.glEnable(GL11.GL_TEXTURE_2D);
+
+            /*
+             * The shader now outputs:
+             *
+             * alpha = 0 outside the effect
+             * alpha = 0..1 along the fading edge
+             * alpha = 1 near the center
+             */
+            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glBlendFunc(
+                    GL11.GL_SRC_ALPHA,
+                    GL11.GL_ONE_MINUS_SRC_ALPHA
+            );
+
+            /*
+             * Alpha testing could cut off the smooth fade.
+             */
+            GL11.glDisable(GL11.GL_ALPHA_TEST);
+
+            GL11.glColor4f(
+                    1f,
+                    1f,
+                    1f,
+                    1f
+            );
+
+            shader.bind();
+
+            ShaderUniformManager manager =
+                    shader.getUniformManager();
+
+            manager
+                    .setTexture(
+                            "textureSampler",
+                            screenTextureID,
+                            GL13.GL_TEXTURE0
+                    )
+                    .setVector2(
+                            "texelSize",
+                            new Vector2f(
+                                    1f / windowWidth,
+                                    1f / windowHeight
+                            )
+                    );
+
+            for (BendingInstance instance : instances) {
+                instance.render(
+                        viewport,
+                        manager
+                );
+            }
+        } finally {
+            if (shader != null) {
+                shader.unbind();
+            }
+
+            GL13.glActiveTexture(GL13.GL_TEXTURE0);
+
+            GL11.glBindTexture(
+                    GL11.GL_TEXTURE_2D,
+                    0
+            );
+
+            GL11.glPopMatrix();
+            GL11.glPopAttrib();
+        }
+    }
+
     private void updateTexture() {
-        GL11.glBindTexture(GL11.GL_TEXTURE_2D, this.screenTextureID);
+        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+
+        GL11.glBindTexture(
+                GL11.GL_TEXTURE_2D,
+                screenTextureID
+        );
 
         GL11.glCopyTexSubImage2D(
                 GL11.GL_TEXTURE_2D,
                 0,
-                0, 0,
-                0, 0,
-                windowWidth, windowHeight
+                0,
+                0,
+                0,
+                0,
+                windowWidth,
+                windowHeight
         );
     }
 
-    public BendingEffectHandler addInstance(BendingInstance ins) {
-        this.instances.add(ins);
+    public BendingEffectHandler addInstance(
+            BendingInstance instance
+    ) {
+        if (instance != null) {
+            instances.add(instance);
+        }
+
         return this;
     }
-    public BendingEffectHandler addInstances(List<BendingInstance> insts) {
-        this.instances.addAll(insts);
+
+    public BendingEffectHandler addInstances(
+            List<BendingInstance> newInstances
+    ) {
+        if (newInstances == null) {
+            return this;
+        }
+
+        for (BendingInstance instance : newInstances) {
+            if (instance != null) {
+                instances.add(instance);
+            }
+        }
+
         return this;
     }
 
     public void dispose() {
-        for (BendingInstance instance : instances)
+        for (BendingInstance instance : instances) {
             instance.dispose();
-        GL11.glDeleteTextures(screenTextureID);
-        shader.dispose();
+        }
+
+        instances.clear();
+
+        if (screenTextureID != -1) {
+            GL11.glDeleteTextures(screenTextureID);
+            screenTextureID = -1;
+        }
+
+        if (shader != null) {
+            shader.dispose();
+            shader = null;
+        }
     }
 
     @Override
@@ -121,6 +348,4 @@ public class BendingEffectHandler extends BaseCombatLayeredRenderingPlugin {
     public boolean isExpired() {
         return false;
     }
-
-
 }

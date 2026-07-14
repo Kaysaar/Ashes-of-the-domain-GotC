@@ -1,5 +1,6 @@
 package data.hullmods;
 
+import com.fs.starfarer.api.Global;
 import com.fs.starfarer.api.combat.BaseHullMod;
 import com.fs.starfarer.api.combat.ShipAPI;
 import data.scripts.effects.EffectsInitializer;
