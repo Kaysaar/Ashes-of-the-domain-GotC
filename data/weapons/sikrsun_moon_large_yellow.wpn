@@ -1,0 +1,58 @@
+{
+  "id": "sikrsun_moon_large_yellow",
+  "specClass": "beam",
+  "type": "ENERGY",
+  "size": "LARGE",
+  "collisionClass": "RAY",
+  "collisionClassByFighter": "RAY_FIGHTER",
+  "displayArcRadius": 550,
+  "turretSprite": "graphics/weapons/sikrsun_moon_large.png",
+  "turretGlowSprite": "graphics/weapons/sikrsun_moon_large_glow.png",
+  "hardpointSprite": "graphics/weapons/sikrsun_moon_large.png",
+  "hardpointGlowSprite": "graphics/weapons/sikrsun_moon_large_glow.png",
+  "glowColor": [
+    255,
+    245,
+    236,
+    255
+  ],
+  "hitGlowRadius": 0,
+  "turretOffsets": [
+    4,
+    0
+  ],
+  "turretAngleOffsets": [
+    0
+  ],
+  "hardpointOffsets": [
+    9,
+    0
+  ],
+  "hardpointAngleOffsets": [
+    0
+  ],
+  "fringeColor": [
+    255,
+    245,
+    236,
+    255
+  ],
+  "coreColor": [
+    255,
+    245,
+    240,
+    255
+  ],
+  "width": 20,
+  "textureType": ROUGH,
+  "textureScrollSpeed": 260,
+  "pixelsPerTexel": 5,
+  "pierceSet": [
+    PROJECTILE_FF,
+    PROJECTILE_NO_FF,
+    PROJECTILE_FIGHTER,
+    MISSILE_FF,
+    MISSILE_NO_FF
+  ],
+  "fireSoundTwo": "graviton_beam_loop"
+}

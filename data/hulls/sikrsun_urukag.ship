@@ -1,0 +1,215 @@
+{
+  "hullName": "Urukag",
+  "hullId": "sikrsun_urukag",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/ships/sikrsun_urukag.png",
+  "style": "HIGH_TECH",
+  "height": 226,
+  "width": 112,
+  "center": [56, 132],
+  "collisionRadius": 146.5,
+  "shieldCenter": [-17, -0],
+  "shieldRadius": 124.5,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS0009": "sikrsun_glow_medium_0"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 220,
+      "angle": 90,
+      "locations": [-63, 16]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 220,
+      "angle": -90,
+      "locations": [-63, -16]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 50,
+      "locations": [-67, 36]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -50,
+      "locations": [-67, -36]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 50,
+      "locations": [-75, 39]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -50,
+      "locations": [-75, -39]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 50,
+      "locations": [-83, 42]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "SYSTEM",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": -50,
+      "locations": [-83, -42]
+    },
+    {
+      "id": "WS0009",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-113, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-93, 12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-93, -12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-99, 12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-99, -12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-105, 12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-105, -12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-111, 12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-111, -12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-117, 12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-117, -12],
+      "length": 4.596194,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    }
+  ],
+  "bounds": [
+    -125, -11,
+    -87, -14,
+    -81, -22,
+    -110, -33,
+    -101, -54,
+    -45, -30,
+    -31, -34,
+    -15, -28,
+    1, -34,
+    17, -28,
+    33, -34,
+    49, -27,
+    65, -34,
+    76, -29,
+    91, -7,
+    91, 7,
+    76, 29,
+    65, 34,
+    49, 27,
+    33, 34,
+    17, 28,
+    1, 34,
+    -15, 28,
+    -31, 34,
+    -45, 30,
+    -101, 54,
+    -110, 33,
+    -81, 22,
+    -87, 14,
+    -125, 11,
+    -129, -0
+  ]
+}

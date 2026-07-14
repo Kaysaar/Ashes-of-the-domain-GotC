@@ -1,0 +1,252 @@
+{
+  "hullName": "Sippar",
+  "hullId": "sikrsun_sippar",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/sikrsun_sippar.png",
+  "style": "HIGH_TECH",
+  "height": 152,
+  "width": 114,
+  "center": [57, 82],
+  "collisionRadius": 94.5,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 93,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "COVER0": "sikrsun_sippar_deco",
+    "WS0010": "sikrsun_glow_medium_0"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "UNIVERSAL",
+      "mount": "HARDPOINT",
+      "arc": 10,
+      "angle": 0,
+      "locations": [44, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": 65,
+      "locations": [46, 26],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": -65,
+      "locations": [46, -26],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": 76,
+      "locations": [25, 29],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": -76,
+      "locations": [25, -29],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": 100,
+      "locations": [3, 34],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": -100,
+      "locations": [3, -34],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": 115,
+      "locations": [-21, 38],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": -115,
+      "locations": [-21, -38],
+      "renderOrderMod": 200
+    },
+    {
+      "id": "COVER0",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [43, -0],
+      "renderOrderMod": 100
+    },
+    {
+      "id": "SUN",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-2, -0]
+    },
+    {
+      "id": "WS0010",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-63, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-43, 12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-43, -12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-49, 12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-49, -12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-55, 12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-55, -12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-61, 12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-61, -12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-67, 12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-67, -12],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    }
+  ],
+  "bounds": [
+    -70, -13,
+    -36, -14,
+    -28, -22,
+    -39, -27,
+    -57, -22,
+    -40, -52,
+    -15, -50,
+    -5, -54,
+    3, -47,
+    29, -43,
+    38, -48,
+    46, -40,
+    68, -37,
+    66, -10,
+    57, -10,
+    57, 10,
+    66, 10,
+    68, 37,
+    46, 40,
+    38, 48,
+    29, 43,
+    3, 47,
+    -5, 54,
+    -15, 50,
+    -40, 52,
+    -57, 22,
+    -39, 27,
+    -28, 22,
+    -36, 14,
+    -70, 13,
+    -80, -0
+  ]
+}

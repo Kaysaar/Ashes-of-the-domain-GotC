@@ -1,0 +1,5 @@
+id,variant,tags,tier,rarity,fleet pts,op cost,formation,range,attackRunRange,attackPositionOffset,num,role,role desc,refit,base value,,,,,,,,,,,,,number
+sikrsun_nun_wing,sikrsun_nun_interceptor,"fighter4, interceptor, high",1,0.2,5,7,V,3000,200,400,5,INTERCEPTOR,Interceptor,6,5000,,,,,,,,,,,,,
+sikrsun_anthyllis_wing,sikrsun_anthyllis,"fighter5, fighter, high, auto_fighter",3,0.4,7,20,V,8000,100,200,1,FIGHTER,Pressure,30,26000,,,,,,,,,,,,,
+sikrsun_heka_wing,sikrsun_heka_bomber,"bomber3, bomber, high",2,0.2,5,12,V,4000,500,100,3,BOMBER,Clip Bomber,13,5000,,,,,,,,,,,,,
+sikrsun_merit_wing,sikrsun_merit_fighter,"fighter4, fighter, high",2,0.4,6,10,CLAW,4000,300,0,2,FIGHTER,Fighter,12,6800,,,,,,,,,,,,,

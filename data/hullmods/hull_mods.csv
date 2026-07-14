@@ -1,0 +1,3 @@
+name,id,tier,rarity,tech/manufacturer,tags,uiTags,base value,unlocked,hidden,hiddenEverywhere,cost_frigate,cost_dest,cost_cruiser,cost_capital,script,desc,short,sprite
+#Hollow Hull,threefairies_hollowhull,0,,,defensive,Defenses,,,TRUE,,0,0,0,0,data.hullmods.threefairies_hollowhull,"The hull of this ship is vastly hollow and filled with support beam, making it harder to hit somthing important, reducing damage from high explosive and kinetic by %s ans aslo reduce crew casualty by %s.",Unique configuration protecting key component,graphics/hullmods/reinforced_bulkheads.png
+CustomEngines,sikrsun_EngineEffect,,Sun Breaker,Sun Breaker,,,0,FALSE,FALSE,,0,0,0,0,data.hullmods.SikrsunEngineEffect,,,graphics/icons/intel/all.png

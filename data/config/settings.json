@@ -1,0 +1,26 @@
+{
+    "designTypeColors":{
+        #"Three Fairies":[200,200,100,255],
+    },
+    "plugins": {
+    "SunBearerRenderPluginInitializer": "data.scripts.effects.EffectsInitializer"
+    },
+    "graphics":{
+        "blueprint_packages":{
+            #"threefairies_ship_package":"graphics/icons/cargo/sikrsun_ship_package.png",
+        },
+        "misc":{
+        },
+        "fx":{
+			"sikrsun_trail_1":"graphics/trails/sikrsun_trail_1.png",
+			"sikrsun_star_yellow":"graphics/planets/star_texture_yellow.jpg",
+			"sikrsun_star_orange":"graphics/planets/star_orange.jpg"
+        },
+        "illustrations":{
+        },
+        "beams":{
+        },
+        "muzzle":{
+        },
+    }
+}

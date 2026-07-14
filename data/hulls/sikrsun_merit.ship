@@ -1,0 +1,50 @@
+{
+  "hullName": "Merit",
+  "hullId": "sikrsun_merit",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/fighters/sikrsun_merit.png",
+  "style": "HIGH_TECH",
+  "height": 42,
+  "width": 28,
+  "center": [14, 17],
+  "collisionRadius": 32.5,
+  "shieldCenter": [4, 0],
+  "shieldRadius": 25.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 20,
+      "angle": 0,
+      "locations": [18, 1]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 20,
+      "angle": -0,
+      "locations": [18, -1]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-17, -0],
+      "length": 28,
+      "width": 12,
+      "angle": 180,
+      "contrailSize": 12,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    -7, -12,
+    22, -0,
+    -7, 12,
+    -16, -0
+  ]
+}

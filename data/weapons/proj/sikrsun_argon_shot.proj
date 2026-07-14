@@ -1,0 +1,17 @@
+{
+	"id":"sikrsun_argon_shot",
+	"specClass":"missile",	
+	"missileType":"MISSILE",
+	"sprite":"graphics/missiles/sikrsun_nothing.png",
+	"size":[4,7],	
+	"center":[2,3.5],
+	"collisionRadius":10,
+	"collisionClass":"MISSILE_NO_FF",
+	"fadeTime":0, # fadeout duration
+	"explosionColor":[230,20,20,255],  # purely visual, will get a white additively blended core on top of this color
+	"explosionRadius":60, # purely visual
+	"engineSpec":{"turnAcc":700,
+				  "turnRate":200,
+				  "acc":1000,
+				  "dec":0},				  
+}

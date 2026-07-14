@@ -1,0 +1,415 @@
+{
+  "hullName": "Nineveh",
+  "hullId": "sikrsun_nineveh",
+  "hullSize": "CAPITAL_SHIP",
+  "spriteName": "graphics/ships/sikrsun_nineveh.png",
+  "style": "HIGH_TECH",
+  "height": 272,
+  "width": 468,
+  "center": [234, 136],
+  "collisionRadius": 268,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 261,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "GLOW1": "sikrsun_glow_medium_0",
+    "GLOW2": "sikrsun_glow_medium_0",
+    "SUN": "sikrsun_star_yellow",
+    "WS0001": "sikrsun_moon_large_yellow"
+  },
+  "weaponSlots": [
+    {
+      "id": "GLOW1",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-108, 38]
+    },
+    {
+      "id": "GLOW2",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-108, -38]
+    },
+    {
+      "id": "WS0001",
+      "size": "LARGE",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 40,
+      "angle": 0,
+      "locations": [46, -39]
+    },
+    {
+      "id": "WS0002",
+      "size": "LARGE",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 225,
+      "angle": 0,
+      "locations": [81, 17]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "SYNERGY",
+      "mount": "TURRET",
+      "arc": 160,
+      "angle": 30,
+      "locations": [53, 88]
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 160,
+      "angle": -32,
+      "locations": [73, -88]
+    },
+    {
+      "id": "WS0005",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 256,
+      "angle": -90,
+      "locations": [11, -200]
+    },
+    {
+      "id": "WS0006",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 256,
+      "angle": 90,
+      "locations": [11, 200]
+    },
+    {
+      "id": "WS0007",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 200,
+      "angle": 180,
+      "locations": [-63, -0]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 150,
+      "angle": -50,
+      "locations": [36, -221]
+    },
+    {
+      "id": "WS0009",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 150,
+      "angle": 50,
+      "locations": [36, 221]
+    },
+    {
+      "id": "WS0010",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": -135.5,
+      "locations": [-59, -67]
+    },
+    {
+      "id": "WS0011",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 120,
+      "angle": 135.5,
+      "locations": [-59, 67]
+    },
+    {
+      "id": "SUN",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 0,
+      "locations": [7, 29.5]
+    },
+    {
+      "id": "LB 1",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        54.5, -120,
+        47, -141
+      ]
+    },
+    {
+      "id": "LB 2",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        46.5, -171,
+        39.5, -193
+      ]
+    },
+    {
+      "id": "LB 3",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        -27, -180,
+        -34.5, -156
+      ]
+    },
+    {
+      "id": "LB 4",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        -41.5, -117,
+        -45.5, -102.5,
+        -37, 172
+      ]
+    },
+    {
+      "id": "LB 5",
+      "size": "LARGE",
+      "type": "LAUNCH_BAY",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [
+        38.5, 189.5,
+        43.5, 158.5,
+        55.5, 135
+      ]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-87, 51],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-87, -51],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-93, 51],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-93, -51],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-99, 51],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-99, -51],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-105, 51],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-105, -51],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-111, 51],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-111, -51],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-87, 25],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-87, -25],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-93, 25],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-93, -25],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-99, 25],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-99, -25],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-105, 25],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-105, -25],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-111, 25],
+      "length": 0,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-111, -25],
+      "length": 0,
+      "width": 10,
+      "angle": -180,
+      "contrailSize": 30,
+      "style": "SUNBEARER"
+    }
+  ],
+  "bounds": [
+    -110, -7,
+    -76, -25,
+    -122, -38,
+    -75, -51,
+    -132, -76,
+    -128, -82,
+    -89, -86,
+    -33, -229,
+    45, -231,
+    93, -112,
+    105, -105,
+    115, -83,
+    105, -68,
+    50, -68,
+    30, -63,
+    18, -39,
+    26, -18,
+    33, -14,
+    26, -2,
+    -5.5, -4,
+    -26.5, 15,
+    -23.5, 50.5,
+    6, 66,
+    35.5, 55.5,
+    44, 31,
+    26, -2,
+    33, -14,
+    49, -9.5,
+    117, -10,
+    134, 19,
+    45, 230,
+    -33, 229,
+    -65, 135,
+    -76, 126,
+    -89, 86,
+    -128, 82,
+    -132, 76,
+    -75, 51,
+    -122, 38,
+    -76, 25,
+    -110, 7
+  ]
+}

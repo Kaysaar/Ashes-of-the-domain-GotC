@@ -1,0 +1,69 @@
+{
+  "hullName": "Nun",
+  "hullId": "sikrsun_nun",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/fighters/sikrsun_nun.png",
+  "style": "HIGH_TECH",
+  "coversColor": "250,250,250,250",
+  "height": 33,
+  "width": 24,
+  "center": [12, 16.5],
+  "collisionRadius": 26.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 20.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 28,
+      "angle": 0,
+      "locations": [6, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 28,
+      "angle": 0,
+      "locations": [3.5, 3]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-16, -0],
+      "length": 22,
+      "width": 10,
+      "angle": 180,
+      "contrailSize": 10,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-13, 6.5],
+      "length": 8.971975,
+      "width": 5.832207,
+      "angle": 162.5,
+      "contrailSize": 128,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-13, -6.5],
+      "length": 8.971975,
+      "width": 5.832207,
+      "angle": -162.5,
+      "contrailSize": 128,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    -15, 0,
+    -10.5, -10,
+    14.5, 0,
+    14.5, -0,
+    -10.5, 10,
+    -15, -0
+  ]
+}

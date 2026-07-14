@@ -1,0 +1,48 @@
+{
+  "hullName": "Merit Lamina",
+  "hullId": "sikrsun_merit_drone",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/fighters/sikrsun_merit_drone.png",
+  "style": "HIGH_TECH",
+  "height": 30,
+  "width": 12,
+  "center": [6, 15],
+  "collisionRadius": 18.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 17,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "HIDDEN",
+      "arc": 20,
+      "angle": 0,
+      "locations": [12, -0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-12, 3],
+      "length": 12.929671,
+      "width": 5.319245,
+      "angle": 167,
+      "contrailSize": 5.319245,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-12, -3],
+      "length": 12.929671,
+      "width": 5.319245,
+      "angle": -167,
+      "contrailSize": 5.319245,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    -10, -5,
+    14, -0,
+    -10, 5
+  ]
+}

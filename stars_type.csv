@@ -1,0 +1,20 @@
+Star type,Classification,Max speed,Shield efficiency,Flux dissipation,Flux pool,OP influence
+brown + white,L + A,+,o,+,-,-
+red,M,--,++,--,+++,+
+yellow,G2,o,o,o,o,o
+blue,O,+,-,++,-,o
+neutron,*,++ / unstable,++ / unstable,++,o,o
+,,,,,,
+star_browndwarf,L,,,,,
+star_red_dwarf,M,-,+,,,
+star_red_giant,M,--,++,,,
+star_red_supergiant,M,---,+++,,,
+star_orange,K,,,,,
+star_orange_giant,K,,,,,
+star_yellow,G2,o,o,o,o,o
+star_white,A,,,,,
+star_blue_giant,O,,,,,
+star_blue_supergiant,O,,,,,
+star_neutron,*,,,,,
+black_hole,*,,,,,
+,,,,,,

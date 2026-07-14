@@ -1,0 +1,33 @@
+{
+	"id":"sikrsun_anthyllis_system",
+	"type":"DRONE_LAUNCHER",
+	"aiType":"DRONE_LAUNCHER_PD",
+	
+	"droneVariant":"sikrsun_anthyllis_lamina",
+	
+	"allowFreeRoam":false,
+	
+	"launchSpeed":200,
+	"launchDelay":0.1,
+	"maxDrones":20,
+	"droneBehavior":[
+		{"droneIndex":[0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23],
+		 "defaultFacing":"MATCH_DRONE_HEADING",	# MATCH_DRONE_HEADING, MATCH_SHIP_HEADING, MATCH_SHIP_FACING, AWAY_FROM_SHIP
+		 "faceEnemy":true,
+		 "holdRoamRange":0,
+		 "freeRoamRange":150,
+		 "targetPriority":[SHIP_TARGET, FIGHTER, SHIP, MISSILE], # also SHIP_TARGET to prefer targeting the mothership's target
+		 "initialOrbitAngle":0,
+		 "orbitRadius":30, 				# plus ship radius
+		 "orbitDir":1, 					# -1 or 1
+		 "orbitSpeed":100, 				# pixels/second
+		},
+	],
+	
+	"useSound":"drone_launch",
+	"outOfUsesSound":"gun_out_of_ammo",
+	
+	"aiHints":{
+
+	}
+}

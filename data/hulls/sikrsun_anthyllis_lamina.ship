@@ -1,0 +1,41 @@
+{
+  "hullName": "Anthyllis Lamina",
+  "hullId": "sikrsun_anthyllis_lamina",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/fighters/sikrsun_anthyllis_lamina.png",
+  "style": "HIGH_TECH",
+  "coversColor": "250,250,250,250",
+  "height": 17,
+  "width": 11,
+  "center": [5.5, 8.5],
+  "collisionRadius": 11.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 10.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "HIDDEN",
+      "arc": 45,
+      "angle": -0,
+      "locations": [2.5, 0]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-4.5, -0],
+      "length": 7.5,
+      "width": 4,
+      "angle": 180,
+      "contrailSize": 4,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    -5.5, -4.5,
+    -5.5, 4.5,
+    8, -0
+  ]
+}

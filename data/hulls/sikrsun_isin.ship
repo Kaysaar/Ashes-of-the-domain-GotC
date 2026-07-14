@@ -1,0 +1,221 @@
+{
+  "hullName": "Isin",
+  "hullId": "sikrsun_isin",
+  "hullSize": "FRIGATE",
+  "spriteName": "graphics/ships/sikrsun_isin.png",
+  "style": "HIGH_TECH",
+  "height": 122,
+  "width": 114,
+  "center": [57, 66],
+  "collisionRadius": 81,
+  "shieldCenter": [0, -0],
+  "shieldRadius": 79,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "WS0001": "sikrsun_moon_yellow",
+    "WS0003": "sikrsun_isin_glow_1",
+    "WS0004": "sikrsun_isin_glow_2"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "LARGE",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 80,
+      "angle": 0,
+      "locations": [48, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "UNIVERSAL",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [27, 27]
+    },
+    {
+      "id": "SUN",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 0,
+      "angle": 0,
+      "locations": [0, -0]
+    },
+    {
+      "id": "WS0003",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-48, 26]
+    },
+    {
+      "id": "WS0004",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [-48, -26]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-25, 30],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-25, -30],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-31, 31],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-31, -31],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-36, 33],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-36, -33],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-41, 34],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-41, -34],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-48, 35],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-48, -35],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-37, 15],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-37, -15],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-43, 16],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-43, -16],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-49, 17],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": -135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-49, -17],
+      "length": 3.889087,
+      "width": 3.535534,
+      "angle": 135,
+      "contrailSize": 3.535534,
+      "style": "SUNBEARER"
+    }
+  ],
+  "bounds": [
+    -28, -9,
+    -63, -23,
+    -56, -36,
+    -17, -31,
+    -29, -42,
+    -16, -55,
+    53, -37,
+    53, -17,
+    32, -0,
+    53, 17,
+    53, 37,
+    -16, 55,
+    -29, 42,
+    -17, 31,
+    -56, 36,
+    -63, 23,
+    -28, 9,
+    0, 19,
+    18, -0,
+    0, -19,
+    -21, -9,
+    -21, 11.5,
+    -28, 9
+  ]
+}

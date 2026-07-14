@@ -1,0 +1,63 @@
+{
+  "id": "sikrsun_argon",
+  "specClass": "projectile",
+  "projectileSpecId": "sikrsun_argon_shot",
+  "type": "ENERGY",
+  "size": "MEDIUM",
+  "turretSprite": "graphics/weapons/sikrsun_argon_t.png",
+  "hardpointSprite": "graphics/weapons/sikrsun_argon_h.png",
+  "turretOffsets": [
+    11,
+    0,
+    5,
+    -3,
+    5,
+    3,
+    9,
+    -8,
+    9,
+    8
+  ],
+  "turretAngleOffsets": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "hardpointOffsets": [
+    16.5,
+    0,
+    10.5,
+    -3,
+    10.5,
+    3,
+    14.5,
+    -8,
+    14.5,
+    8
+  ],
+  "hardpointAngleOffsets": [
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "barrelMode": "LINKED",
+  "animationType": "MUZZLE_FLASH",
+  "muzzleFlashSpec": {
+    "length": 15,
+    "spread": 10,
+    "particleSizeMin": 10,
+    "particleSizeRange": 10,
+    "particleDuration": 0.5,
+    "particleCount": 10,
+    "particleColor": [
+      255,
+      255,
+      255,
+      255
+    ]
+  }
+}

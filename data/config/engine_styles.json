@@ -1,0 +1,17 @@
+{
+	# Reserved engine style ids (can not be used):
+	# "CUSTOM"
+	
+	"SUNBEARER":{
+		"engineColor":[255,145,75,255],
+		"contrailParticleSizeMult":0,
+		"contrailParticleDuration":0,
+		"contrailParticleFinalSizeMult":0,
+		"contrailMaxSpeedMult":0.5,
+		"contrailAngularVelocityMult":0,
+		"contrailColor":[100,100,100,25],
+		"contrailCampaignColor":[150,120,100,75],
+		"type":"GLOW" # GLOW or SMOKE
+	},
+}
+

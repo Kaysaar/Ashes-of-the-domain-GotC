@@ -1,0 +1,72 @@
+{
+  "hullName": "Anthyllis",
+  "hullId": "sikrsun_anthyllis",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/fighters/sikrsun_anthyllis.png",
+  "style": "HIGH_TECH",
+  "coversColor": "250,250,250,250",
+  "height": 58,
+  "width": 42,
+  "center": [21, 35],
+  "collisionRadius": 38.5,
+  "shieldCenter": [-2, -0],
+  "shieldRadius": 27.5,
+  "viewOffset": 0,
+  "builtInMods": [
+    "no_weapon_flux"
+  ],
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 215,
+      "angle": 180,
+      "locations": [0, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "HIDDEN",
+      "arc": 100,
+      "angle": 31.5,
+      "locations": [7.5, 2]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "HIDDEN",
+      "arc": 100,
+      "angle": -31.5,
+      "locations": [7.5, -2]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-18, 4],
+      "length": 12.5,
+      "width": 6,
+      "angle": 180,
+      "contrailSize": 6,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-18, -4],
+      "length": 12.5,
+      "width": 6,
+      "angle": -180,
+      "contrailSize": 6,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    -17, 5,
+    -1, 13,
+    21, -0,
+    -1, -13,
+    -17, -5
+  ]
+}

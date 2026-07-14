@@ -1,0 +1,29 @@
+{
+	"id":"sikrsun_grav_pool_system",
+	"type":"STAT_MOD",
+	"aiType":"ACAUSAL_DISRUPTOR",
+	
+	"statsScript":"data.shipsystems.scripts.sikrsun_grav_pool",
+
+	"jitterUnderColor":[90,165,255,155],
+	"jitterUnderCopies":25,
+	"jitterUnderMinRange":0,
+	"jitterUnderRange":7,
+	"jitterUnderRangeRadiusFraction":0,
+
+	"useSound":"system_emp_emitter_activate",
+	"loopSound":"system_emp_emitter_loop",
+	"impactSound":"system_emp_emitter_impact",
+	"outOfUsesSound":"gun_out_of_ammo",
+	
+	"aiHints":{
+		"threatRange":700,
+		"threatAmount":4,
+		"threatAngle":0,
+		"threatArc":360,
+	}
+}
+
+
+
+

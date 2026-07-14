@@ -1,0 +1,4 @@
+trail,projectile,sprite,minLength,fadeIn,duration,fadeOut,sizeIn,sizeOut,colorIn,colorOut,opacity,textLength,textScroll,randomTextureOffset,distance,dispersion,drift,fadeOnFadeOut,angleAdjustment,additive,velocityIn,velocityOut,randomVelocity,angle,rotationIn,rotationOut,randomRotation,renderBelowExplosions
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+trails_argon_1,sikrsun_argon_shot,trails_trail_clean,10,0,1.6,0.4,16,12,"[230,20,20,255]","[210,30,30,255]",0.8,-1,0,TRUE,0,0,0,TRUE,FALSE,TRUE,0,0,0,0,0,50,false,false
+trails_argon_glow,sikrsun_argon_shot,trails_trail_clean,10,0,0.1,0.1,10,20,"[230,20,20,255]","[230,20,20,255]",1,200,100,TRUE,0,0,0,TRUE,FALSE,TRUE,0,0,0,0,0,0,false,false

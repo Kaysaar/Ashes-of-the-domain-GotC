@@ -1,0 +1,62 @@
+{
+  "hullName": "Heka",
+  "hullId": "sikrsun_heka",
+  "hullSize": "FIGHTER",
+  "spriteName": "graphics/ships/fighters/sikrsun_heka.png",
+  "style": "HIGH_TECH",
+  "coversColor": "250,250,250,250",
+  "height": 46,
+  "width": 36,
+  "center": [18, 23],
+  "collisionRadius": 33.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 31.5,
+  "viewOffset": 0,
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 256,
+      "angle": -0,
+      "locations": [14, 0]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 0,
+      "locations": [8.5, 4.5]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "BALLISTIC",
+      "mount": "HIDDEN",
+      "arc": 10,
+      "angle": 0,
+      "locations": [8.5, -4.5]
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-11, -0],
+      "length": 27.5,
+      "width": 9,
+      "angle": 180,
+      "contrailSize": 9,
+      "style": "HIGH_TECH"
+    }
+  ],
+  "bounds": [
+    -23.5, 0,
+    -9, -15,
+    21, 0,
+    21, -0,
+    -9, 15,
+    -23.5, -0
+  ]
+}

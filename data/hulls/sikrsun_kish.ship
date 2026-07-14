@@ -1,0 +1,290 @@
+{
+  "hullName": "Kish",
+  "hullId": "sikrsun_kish",
+  "hullSize": "DESTROYER",
+  "spriteName": "graphics/ships/sikrsun_kish.png",
+  "style": "HIGH_TECH",
+  "height": 268,
+  "width": 138,
+  "center": [69, 134],
+  "collisionRadius": 154.5,
+  "shieldCenter": [0, 0],
+  "shieldRadius": 152.5,
+  "viewOffset": 0,
+  "builtInWeapons": {
+    "SUN": "sikrsun_star_yellow",
+    "WS0010": "sikrsun_moon_yellow",
+    "WS0011": "sikrsun_glow_medium_0",
+    "WS0012": "sikrsun_kish_deco_1",
+    "WS0013": "sikrsun_kish_deco_2"
+  },
+  "weaponSlots": [
+    {
+      "id": "WS0001",
+      "size": "MEDIUM",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [-2, -0]
+    },
+    {
+      "id": "WS0002",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 260,
+      "angle": 0,
+      "locations": [97, -0]
+    },
+    {
+      "id": "WS0003",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 260,
+      "angle": 0,
+      "locations": [72, -0]
+    },
+    {
+      "id": "WS0004",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 220,
+      "angle": 45,
+      "locations": [-20, 37]
+    },
+    {
+      "id": "WS0005",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 220,
+      "angle": -45,
+      "locations": [-20, -37]
+    },
+    {
+      "id": "WS0006",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": 0,
+      "locations": [-48, 44]
+    },
+    {
+      "id": "WS0007",
+      "size": "SMALL",
+      "type": "ENERGY",
+      "mount": "TURRET",
+      "arc": 360,
+      "angle": -0,
+      "locations": [-48, -44]
+    },
+    {
+      "id": "WS0008",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 10,
+      "angle": 0,
+      "locations": [11, 26]
+    },
+    {
+      "id": "WS0009",
+      "size": "SMALL",
+      "type": "MISSILE",
+      "mount": "HARDPOINT",
+      "arc": 10,
+      "angle": -0,
+      "locations": [11, -26]
+    },
+    {
+      "id": "WS0010",
+      "size": "LARGE",
+      "type": "BUILT_IN",
+      "mount": "TURRET",
+      "arc": 260,
+      "angle": 0,
+      "locations": [139, -0]
+    },
+    {
+      "id": "SUN",
+      "size": "LARGE",
+      "type": "DECORATIVE",
+      "mount": "HIDDEN",
+      "arc": 360,
+      "angle": 0,
+      "locations": [-41, -0]
+    },
+    {
+      "id": "WS0011",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [-114, -0]
+    },
+    {
+      "id": "WS0012",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": 0,
+      "locations": [16, 41],
+      "renderOrderMod": 1000
+    },
+    {
+      "id": "WS0013",
+      "size": "MEDIUM",
+      "type": "DECORATIVE",
+      "mount": "TURRET",
+      "arc": 0,
+      "angle": -0,
+      "locations": [16, -41],
+      "renderOrderMod": 1000
+    }
+  ],
+  "engineSlots": [
+    {
+      "location": [-98, 35],
+      "length": 38.5,
+      "width": 17,
+      "angle": 180,
+      "contrailSize": 126,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-98, -35],
+      "length": 38.5,
+      "width": 17,
+      "angle": -180,
+      "contrailSize": 126,
+      "style": "HIGH_TECH"
+    },
+    {
+      "location": [-94, 12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": 135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-94, -12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": -135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-100, 12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": 135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-100, -12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": -135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-106, 12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": 135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-106, -12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": -135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-112, 12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": 135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-112, -12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": -135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-118, 12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": 135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-118, -12],
+      "length": 5.656854,
+      "width": 4.242641,
+      "angle": -135,
+      "contrailSize": 4.242641,
+      "style": "SUNBEARER"
+    }
+  ],
+  "bounds": [
+    -123, -12,
+    -83, -18,
+    -97, -28,
+    -97, -42,
+    -75, -47,
+    -97, -56,
+    -91, -63,
+    -57, -57,
+    -48, -67,
+    36, -44,
+    28, -34,
+    14, -33,
+    17, -18,
+    28, -22,
+    72, -14,
+    131, -11,
+    131, 11,
+    72, 14,
+    28, 22,
+    17, 18,
+    14, 33,
+    28, 34,
+    36, 44,
+    -48, 67,
+    -57, 57,
+    -91, 63,
+    -97, 56,
+    -75, 47,
+    -97, 42,
+    -97, 28,
+    -83, 18,
+    -63, -0,
+    -41, 22,
+    -18, -0,
+    -41, -22,
+    -63, -0,
+    -83, 18,
+    -123, 12,
+    -130, -0
+  ]
+}
