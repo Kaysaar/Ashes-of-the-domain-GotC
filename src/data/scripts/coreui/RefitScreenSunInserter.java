@@ -34,9 +34,11 @@ public class RefitScreenSunInserter implements EveryFrameScript {
             UIPanelAPI current = ReflectionUtilis.getCurrentTab();
             if(current!=null){
                 UIPanelAPI refitPanel = (UIPanelAPI) ReflectionUtilis.invokeMethodWithAutoProjection("getRefitPanel",current);
+                UIPanelAPI list =  (UIPanelAPI) ReflectionUtilis.invokeMethodWithAutoProjection("getFleetList",current);
                 FleetMemberAPI member = (FleetMemberAPI) ReflectionUtilis.invokeMethodWithAutoProjection("getMember",refitPanel);
                     UIPanelAPI shipDisplay = (UIPanelAPI) ReflectionUtilis.invokeMethodWithAutoProjection("getShipDisplay",refitPanel);
                     ShipAPI ship = (ShipAPI) ReflectionUtilis.invokeMethodWithAutoProjection("getShip",shipDisplay);
+
                     if(ship!=null&&intercepter==null){
                         RefitScreenSunInserter.lastSavedZoom = 1f;
                         intercepter = new RefitScreenZoomIntercepter(1,1,ship,shipDisplay);
@@ -52,7 +54,7 @@ public class RefitScreenSunInserter implements EveryFrameScript {
                     }
                     if(weapon!=null){
                         if(render==null){
-                            render = new SunRedneringUI(0,0,lastSaved,weapon,shipDisplay);
+                            render = new  SunRedneringUI(0,0,lastSaved,weapon,shipDisplay);
                             haveSavedStatusOfZoom = true;
                             refitPanel.addComponent(render.getMainPanel()).inTL(0,0);
                         }
