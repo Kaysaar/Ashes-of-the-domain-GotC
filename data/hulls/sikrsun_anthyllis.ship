@@ -10,7 +10,7 @@
   "center": [21, 35],
   "collisionRadius": 38.5,
   "shieldCenter": [-2, -0],
-  "shieldRadius": 27.5,
+  "shieldRadius": 32,
   "viewOffset": 0,
   "builtInMods": [
     "no_weapon_flux"

@@ -7,10 +7,13 @@
   "height": 268,
   "width": 138,
   "center": [69, 134],
-  "collisionRadius": 154.5,
+  "collisionRadius": 162.5,
   "shieldCenter": [0, 0],
-  "shieldRadius": 152.5,
+  "shieldRadius": 159.5,
   "viewOffset": 0,
+  "builtInMods": [
+    "sikrsun_EngineEffect"
+  ],
   "builtInWeapons": {
     "SUN": "sikrsun_star_yellow",
     "WS0010": "sikrsun_moon_yellow",
@@ -18,9 +21,6 @@
     "WS0012": "sikrsun_kish_deco_1",
     "WS0013": "sikrsun_kish_deco_2"
   },
-   "builtInMods": [
-    "sikrsun_EngineEffect"
-  ],
   "weaponSlots": [
     {
       "id": "WS0001",
@@ -157,7 +157,7 @@
       "length": 38.5,
       "width": 17,
       "angle": 180,
-      "contrailSize": 126,
+      "contrailSize": 128,
       "style": "HIGH_TECH"
     },
     {
@@ -165,87 +165,87 @@
       "length": 38.5,
       "width": 17,
       "angle": -180,
-      "contrailSize": 126,
+      "contrailSize": 128,
       "style": "HIGH_TECH"
     },
     {
-      "location": [-94, 12],
-      "length": 5.656854,
-      "width": 4.242641,
+      "location": [-97, 12],
+      "length": 0,
+      "width": 6,
       "angle": 135,
-      "contrailSize": 4.242641,
+      "contrailSize": 8,
       "style": "SUNBEARER"
     },
     {
-      "location": [-94, -12],
-      "length": 5.656854,
-      "width": 4.242641,
+      "location": [-97, -12],
+      "length": 0,
+      "width": 6,
       "angle": -135,
-      "contrailSize": 4.242641,
-      "style": "SUNBEARER"
-    },
-    {
-      "location": [-100, 12],
-      "length": 5.656854,
-      "width": 4.242641,
-      "angle": 135,
-      "contrailSize": 4.242641,
-      "style": "SUNBEARER"
-    },
-    {
-      "location": [-100, -12],
-      "length": 5.656854,
-      "width": 4.242641,
-      "angle": -135,
-      "contrailSize": 4.242641,
+      "contrailSize": 8,
       "style": "SUNBEARER"
     },
     {
       "location": [-106, 12],
-      "length": 5.656854,
-      "width": 4.242641,
+      "length": 0,
+      "width": 6,
       "angle": 135,
-      "contrailSize": 4.242641,
+      "contrailSize": 8,
       "style": "SUNBEARER"
     },
     {
       "location": [-106, -12],
-      "length": 5.656854,
-      "width": 4.242641,
+      "length": 0,
+      "width": 6,
       "angle": -135,
-      "contrailSize": 4.242641,
+      "contrailSize": 8,
       "style": "SUNBEARER"
     },
     {
-      "location": [-112, 12],
-      "length": 5.656854,
-      "width": 4.242641,
+      "location": [-115, 12],
+      "length": 0,
+      "width": 6,
       "angle": 135,
-      "contrailSize": 4.242641,
+      "contrailSize": 8,
       "style": "SUNBEARER"
     },
     {
-      "location": [-112, -12],
-      "length": 5.656854,
-      "width": 4.242641,
+      "location": [-115, -12],
+      "length": 0,
+      "width": 6,
       "angle": -135,
-      "contrailSize": 4.242641,
+      "contrailSize": 8,
       "style": "SUNBEARER"
     },
     {
-      "location": [-118, 12],
-      "length": 5.656854,
-      "width": 4.242641,
+      "location": [-124, 10],
+      "length": 0,
+      "width": 6,
       "angle": 135,
-      "contrailSize": 4.242641,
+      "contrailSize": 8,
       "style": "SUNBEARER"
     },
     {
-      "location": [-118, -12],
-      "length": 5.656854,
-      "width": 4.242641,
+      "location": [-124, -10],
+      "length": 0,
+      "width": 6,
       "angle": -135,
-      "contrailSize": 4.242641,
+      "contrailSize": 8,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-129, 4],
+      "length": 0,
+      "width": 6,
+      "angle": 135,
+      "contrailSize": 8,
+      "style": "SUNBEARER"
+    },
+    {
+      "location": [-129, -4],
+      "length": 0,
+      "width": 6,
+      "angle": -135,
+      "contrailSize": 8,
       "style": "SUNBEARER"
     }
   ],
