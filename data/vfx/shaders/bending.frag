@@ -3,106 +3,170 @@
 uniform sampler2D textureSampler;
 
 uniform float strength;
-uniform float radius;
 
-uniform vec2 minUV;
-uniform vec2 maxUV;
+/*
+ * Normalized inner radius:
+ *
+ * 0.0 = no black center
+ * 1.0 = reaches the outer boundary
+ *
+ * Only used by circle mode.
+ */
+uniform float innerRadius;
+
+/*
+ * 0 = circle
+ * 1 = cylinder/capsule
+ */
+uniform int shapeMode;
+
+/*
+ * Full world-space width and height.
+ */
+uniform vec2 effectDimensions;
+
+/*
+ * Framebuffer mapping for the rotated effect quad.
+ */
+uniform vec2 centerUV;
+uniform vec2 axisXUV;
+uniform vec2 axisYUV;
+
 uniform vec2 texelSize;
+
+vec2 localToScreenUV(vec2 localUV)
+{
+    vec2 centered = localUV - vec2(0.5);
+
+    return centerUV
+        + centered.x * 2.0 * axisXUV
+        + centered.y * 2.0 * axisYUV;
+}
 
 void main()
 {
+    vec2 localUV =
+        gl_TexCoord[0].st;
+
     /*
-     * Coordinates inside the square effect quad.
-     * localUV always ranges from 0 to 1.
+     * Local world-space coordinates around the effect center.
      */
-    vec2 localUV = gl_TexCoord[0].st;
+    vec2 localPosition =
+        (localUV - vec2(0.5))
+        * effectDimensions;
+
+    float shapeRadius =
+        max(effectDimensions.x * 0.5, 0.0001);
 
     /*
-     * Corresponding position in the captured screen texture.
-     */
-    vec2 screenUV = mix(minUV, maxUV, localUV);
-
-    /*
-     * Position around the effect center.
-     */
-    vec2 localPosition = localUV - vec2(0.5);
-
-    float distanceFromCenter = length(localPosition);
-
-    /*
-     * Circular outer boundary.
+     * For a circle, the closest axis point is the center.
      *
-     * Start fading before reaching the quad border so no square edge can
-     * ever become visible.
+     * For a cylinder, it is the closest point on the cylinder's central
+     * vertical line segment.
      */
-    const float outerRadius = 0.49;
-    const float fadeStart = 0.38;
+    vec2 closestAxisPoint =
+        vec2(0.0);
 
-    float effectAlpha =
-        1.0 - smoothstep(
-            fadeStart,
-            outerRadius,
-            distanceFromCenter
+    if (shapeMode == 1)
+    {
+        float halfAxisLength = max(
+            effectDimensions.y * 0.5 - shapeRadius,
+            0.0
         );
 
+        closestAxisPoint.y = clamp(
+            localPosition.y,
+            -halfAxisLength,
+            halfAxisLength
+        );
+    }
+
+    vec2 radialVector =
+        localPosition - closestAxisPoint;
+
+    float radialDistance =
+        length(radialVector);
+
+    float normalizedDistance =
+        radialDistance / shapeRadius;
+
     /*
-     * Outside the circular bending area, do not touch the framebuffer.
+     * Smoothly fade the rendered effect before reaching the outside
+     * boundary. This prevents the rectangular quad from becoming visible.
      */
+    float effectAlpha =
+        1.0 - smoothstep(
+            0.72,
+            1.0,
+            normalizedDistance
+        );
+
     if (effectAlpha <= 0.001)
     {
         discard;
     }
 
     /*
-     * Preserve the optional black inner core from the original shader.
+     * Preserve the original optional black center for circles.
      */
-    if (distanceFromCenter <= radius)
+    if (shapeMode == 0
+        && innerRadius > 0.0
+        && normalizedDistance <= innerRadius)
     {
         gl_FragColor = vec4(
             vec3(0.0),
-            effectAlpha
+            effectAlpha * gl_Color.a
         );
 
         return;
     }
 
-    vec2 direction =
-        localPosition
-        / max(distanceFromCenter, 0.0001);
+    vec2 radialDirection =
+        vec2(0.0);
 
-    float distanceFromInnerRadius =
-        distanceFromCenter - radius;
+    if (radialDistance > 0.0001)
+    {
+        radialDirection =
+            radialVector / radialDistance;
+    }
 
-    /*
-     * Distortion becomes stronger near the inner radius.
-     */
+    float distanceFromInner =
+        max(
+            normalizedDistance - innerRadius,
+            0.0
+        );
+
     float distortionAmount =
         strength
         / (
-            distanceFromInnerRadius
-            * distanceFromInnerRadius
+            distanceFromInner * distanceFromInner
             + 0.1
         );
 
     /*
-     * Convert displacement inside the local quad into screen-texture UV
-     * displacement.
+     * Use the cylinder diameter as the distortion scale. This gives the
+     * circular and cylinder modes comparable distortion strength.
      */
-    vec2 quadScreenSize = maxUV - minUV;
-
-    vec2 distortedUV =
-        screenUV
-        - direction
-        * quadScreenSize
+    vec2 displacementWorld =
+        radialDirection
         * distortionAmount
+        * shapeRadius
+        * 2.0
         * effectAlpha;
 
-    /*
-     * Prevent the shader from sampling outside the captured framebuffer
-     * when the effect is close to a screen border.
-     */
-    vec2 minimumSafeUV = texelSize * 0.5;
-    vec2 maximumSafeUV = vec2(1.0) - minimumSafeUV;
+    vec2 displacedLocalUV =
+        localUV
+        - displacementWorld
+        / effectDimensions;
+
+    vec2 distortedUV =
+        localToScreenUV(displacedLocalUV);
+
+    vec2 minimumSafeUV =
+        texelSize * 0.5;
+
+    vec2 maximumSafeUV =
+        vec2(1.0) - minimumSafeUV;
 
     distortedUV = clamp(
         distortedUV,
@@ -116,12 +180,8 @@ void main()
             distortedUV
         ).rgb;
 
-    /*
-     * Alpha is zero toward the outer edge, allowing the normal background
-     * to remain completely untouched there.
-     */
     gl_FragColor = vec4(
         distortedColor,
-        effectAlpha
+        effectAlpha * gl_Color.a
     );
 }

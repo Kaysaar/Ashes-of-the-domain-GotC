@@ -28,9 +28,6 @@ public class BendingEffectHandler
     private final List<BendingInstance> instances =
             new ArrayList<>();
 
-    /*
-     * Reused lists prevent new ArrayList allocations every frame.
-     */
     private final List<BendingInstance> visibleInstances =
             new ArrayList<>();
 
@@ -41,14 +38,16 @@ public class BendingEffectHandler
     private int windowHeight;
 
     public BendingEffectHandler() {
-        this.layer = CombatEngineLayers.UNDER_SHIPS_LAYER;
+        this.layer =
+                CombatEngineLayers.BELOW_SHIPS_LAYER;
+
         initResources();
     }
 
     @Override
     public EnumSet<CombatEngineLayers> getActiveLayers() {
         return EnumSet.of(
-                CombatEngineLayers.UNDER_SHIPS_LAYER
+                CombatEngineLayers.BELOW_SHIPS_LAYER
         );
     }
 
@@ -88,9 +87,12 @@ public class BendingEffectHandler
 
         clearOpenGLErrors();
 
-        screenTextureID = GL11.glGenTextures();
+        screenTextureID =
+                GL11.glGenTextures();
 
-        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+        GL13.glActiveTexture(
+                GL13.GL_TEXTURE0
+        );
 
         GL11.glBindTexture(
                 GL11.GL_TEXTURE_2D,
@@ -133,7 +135,8 @@ public class BendingEffectHandler
                 GL12.GL_CLAMP_TO_EDGE
         );
 
-        int error = GL11.glGetError();
+        int error =
+                GL11.glGetError();
 
         if (error != GL11.GL_NO_ERROR) {
             Global.getLogger(
@@ -141,9 +144,8 @@ public class BendingEffectHandler
             ).log(
                     Level.ERROR,
                     new OpenGLException(
-                            "Could not create bending framebuffer "
-                                    + "texture. OpenGL error: "
-                                    + error
+                            "Could not create bending framebuffer texture. "
+                                    + "OpenGL error: " + error
                     )
             );
         }
@@ -183,18 +185,26 @@ public class BendingEffectHandler
     }
 
     private void clearOpenGLErrors() {
-        while (GL11.glGetError() != GL11.GL_NO_ERROR) {
-            // Clear all previously queued OpenGL errors.
+        while (GL11.glGetError()
+                != GL11.GL_NO_ERROR) {
+            // Clear existing OpenGL errors.
         }
     }
 
     @Override
     public void advance(float amount) {
-        instances.removeIf(
-                instance ->
-                        instance == null
-                                || instance.shouldRemove()
-        );
+        for (int i = instances.size() - 1; i >= 0; i--) {
+            BendingInstance instance =
+                    instances.get(i);
+
+            if (instance == null
+                    || instance.shouldRemove()) {
+                instances.remove(i);
+                continue;
+            }
+
+            instance.advance(amount);
+        }
     }
 
     @Override
@@ -212,10 +222,6 @@ public class BendingEffectHandler
         ensureCorrectTextureSize();
         collectVisibleInstances(viewport);
 
-        /*
-         * Avoid even copying the framebuffer when every effect is
-         * outside the viewport.
-         */
         if (visibleInstances.isEmpty()) {
             return;
         }
@@ -231,20 +237,26 @@ public class BendingEffectHandler
 
         try {
             /*
-             * Base capture used by every visible instance that does not
-             * need to see a previously rendered bending effect.
+             * Base framebuffer capture shared by all independent effects.
              */
             updateTexture();
 
-            GL11.glEnable(GL11.GL_TEXTURE_2D);
+            GL11.glEnable(
+                    GL11.GL_TEXTURE_2D
+            );
 
-            GL11.glEnable(GL11.GL_BLEND);
+            GL11.glEnable(
+                    GL11.GL_BLEND
+            );
+
             GL11.glBlendFunc(
                     GL11.GL_SRC_ALPHA,
                     GL11.GL_ONE_MINUS_SRC_ALPHA
             );
 
-            GL11.glDisable(GL11.GL_ALPHA_TEST);
+            GL11.glDisable(
+                    GL11.GL_ALPHA_TEST
+            );
 
             GL11.glColor4f(
                     1f,
@@ -277,10 +289,6 @@ public class BendingEffectHandler
             for (BendingInstance instance
                     : visibleInstances) {
 
-                /*
-                 * The initial framebuffer capture is already sufficient
-                 * for the first visible instance.
-                 */
                 if (!renderedInstances.isEmpty()
                         && requiresNewBackBuffer(instance)) {
                     updateTexture();
@@ -337,10 +345,6 @@ public class BendingEffectHandler
         }
     }
 
-    /**
-     * A new framebuffer capture is needed when explicitly requested or
-     * when this effect overlaps an effect already rendered this frame.
-     */
     private boolean requiresNewBackBuffer(
             BendingInstance instance
     ) {
@@ -359,12 +363,10 @@ public class BendingEffectHandler
         return false;
     }
 
-    /**
-     * Captures the current framebuffer into the texture sampled by the
-     * bending shader.
-     */
     private void updateTexture() {
-        GL13.glActiveTexture(GL13.GL_TEXTURE0);
+        GL13.glActiveTexture(
+                GL13.GL_TEXTURE0
+        );
 
         GL11.glBindTexture(
                 GL11.GL_TEXTURE_2D,

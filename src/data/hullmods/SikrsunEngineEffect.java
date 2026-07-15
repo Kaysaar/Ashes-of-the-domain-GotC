@@ -21,7 +21,8 @@ public class SikrsunEngineEffect extends BaseHullMod {
             return;
         }
 
-        String hullId = ship.getHullSpec().getHullId();
+        String hullId =
+                ship.getHullSpec().getHullId();
 
         BendingShipEffectData shipEffectData =
                 BendingEffectDataHandler.getDataFromList(hullId);
@@ -38,20 +39,32 @@ public class SikrsunEngineEffect extends BaseHullMod {
         for (BendingShipEffectData.BendingEffectData effectData
                 : shipEffectData.effects) {
 
-            if (effectData == null || effectData.coordinates == null) {
+            if (effectData == null
+                    || effectData.coordinates == null) {
                 continue;
             }
 
-            BendingInstance instance = new BendingInstance()
-                    .setShip(ship)
-                    .setSize(effectData.size)
-                    .updateOffset(
-                            effectData.coordinates.x,
-                            effectData.coordinates.y
-                    )
-                    .setRadius(effectData.radius)
-                    .setStrength(effectData.maxStrength).
-                    setNeedsBackBufferUpdate(true);
+            BendingInstance instance =
+                    new BendingInstance()
+                            .setShip(ship)
+                            .updateOffset(
+                                    effectData.coordinates.x,
+                                    effectData.coordinates.y
+                            )
+                            .setAngle(effectData.angle)
+                            .setMinStrength(effectData.minStrength)
+                            .setStrength(effectData.maxStrength);
+
+            if (effectData.isCylinder()) {
+                instance.setCylinder(
+                        effectData.radius,
+                        effectData.cylinderHeight
+                );
+            } else {
+                instance
+                        .setSize(effectData.size)
+                        .setRadius(effectData.radius);
+            }
 
             instances.add(instance);
         }

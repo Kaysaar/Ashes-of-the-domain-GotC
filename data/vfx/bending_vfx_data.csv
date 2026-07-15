@@ -1,11 +1,9 @@
-ship_id,amount_of_bending_instances,size,radius,min_strength,max_strength,coordinates_on_ship
-#id of ship,"# amount of bending instances, for all next colums seperator for each new instanse is "";"" if there is none in column 
-then all bending instances will have same stat
-",size of bending effect,radius (so far i saw that can be ignored as it is set to 0),from 0 to 1 ,from 0 to 1 ,"x,y coordinates "
-sikrsun_assur,2,96,0,0.05,0.14,"30,-140.5;-29,-140.5"
-sikrsun_darjan,2,96,0,0.05,0.14,"69,-50;-67,-50"
-sikrsun_dur_untash,2,190,0,0.05,0.14,"-58,-185;57,-185"
-sikrsun_isin,2,96,0,0.05,0.14,"27,-60;-25,-60"
-sikrsun_kish,1,196,0,0.05,0.14,"0.5,-123"
-sikrsun_sippar,1,128,0,0.05,0.14,"0.5,-53"
-sikrsun_urukag,1,128,0,0.05,0.14,"0.5,-108"
+ship_id,amount_of_bending_instances,size,radius,min_strength,max_strength,coordinates_on_ship,cylinder_height,angle
+#id of ship,# amount of bending instances; use semicolons for separate instance values,circle effect size; ignored for cylinders,circle: normalized inner radius; cylinder: world-space half-width,from 0 to 1,from 0 to 1,"x,y coordinates",empty = circle; otherwise total cylinder height,rotation relative to ship; 0 = vertical
+sikrsun_assur,2,96,0,0.05,0.14,"30,-140.5;-29,-140.5",,
+sikrsun_darjan,2,96,0,0.05,0.14,"69,-50;-67,-50",,
+sikrsun_dur_untash,2,0,60,0.42,0.74,"-55,-175;55,-175",170,-16;16
+sikrsun_isin,2,96,0,0.05,0.14,"27,-60;-25,-60",,
+sikrsun_kish,1,196,0,0.05,0.14,"0.5,-123",,
+sikrsun_sippar,1,128,0,0.05,0.14,"0.5,-53",,
+sikrsun_urukag,1,128,0,0.05,0.14,"0.5,-108",,
