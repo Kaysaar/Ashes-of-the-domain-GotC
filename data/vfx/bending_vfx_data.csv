@@ -1,9 +1,10 @@
 ship_id,amount_of_bending_instances,size,radius,min_strength,max_strength,coordinates_on_ship,cylinder_height,angle
 #id of ship,# amount of bending instances; use semicolons for separate instance values,circle effect size; ignored for cylinders,circle: normalized inner radius; cylinder: world-space half-width,from 0 to 1,from 0 to 1,"x,y coordinates",empty = circle; otherwise total cylinder height,rotation relative to ship; 0 = vertical
-sikrsun_assur,2,96,0,0.05,0.14,"30,-140.5;-29,-140.5",,
-sikrsun_darjan,2,96,0,0.05,0.14,"69,-50;-67,-50",,
-sikrsun_dur_untash,2,0,60,0.42,0.74,"-55,-175;55,-175",170,-16;16
-sikrsun_isin,2,96,0,0.05,0.14,"27,-60;-25,-60",,
-sikrsun_kish,1,196,0,0.05,0.14,"0.5,-123",,
-sikrsun_sippar,1,128,0,0.05,0.14,"0.5,-53",,
-sikrsun_urukag,1,128,0,0.05,0.14,"0.5,-108",,
+sikrsun_assur,2,10,30,0.3,0.6,"-30,-140;30,-140",90,-14;14
+sikrsun_darjan,2,96,50,0.3,0.6,"-69,-50;69,-50",120,-16;16
+sikrsun_dur_untash,2,140,50,0.3,0.6,"-55,-175;55,-175",170,-16;16
+sikrsun_isin,2,68,30,0.3,0.6,"-28,-60;28,-60",80,-16;16
+sikrsun_kish,1,120,36,0.3,0.6,"0.5,-123",98,0
+sikrsun_sippar,1,110,36,0.3,0.6,"0.5,-70",90,0
+sikrsun_urukag,1,128,40,0.3,0.6,"0.5,-108",80,0
+sikrsun_nineveh,2,100,36,0.3,0.6,"-38,-126;38,-126",90,0;0

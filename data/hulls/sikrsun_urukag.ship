@@ -7,16 +7,16 @@
   "height": 226,
   "width": 112,
   "center": [56, 132],
-  "collisionRadius": 146.5,
+  "collisionRadius": 149.5,
   "shieldCenter": [-17, -0],
-  "shieldRadius": 124.5,
+  "shieldRadius": 131,
   "viewOffset": 0,
+  "builtInMods": [
+    "sikrsun_EngineEffect"
+  ],
   "builtInWeapons": {
     "WS0009": "sikrsun_glow_medium_0"
   },
-   "builtInMods": [
-    "sikrsun_EngineEffect"
-  ],
   "weaponSlots": [
     {
       "id": "WS0001",
