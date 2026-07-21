@@ -1,6 +1,6 @@
 {
     "designTypeColors":{
-        #"Three Fairies":[200,200,100,255],
+    "I Battlegroup": [205, 173, 0, 255]
     },
     "plugins": {
     "SunBearerRenderPluginInitializer": "data.scripts.effects.EffectsInitializer"

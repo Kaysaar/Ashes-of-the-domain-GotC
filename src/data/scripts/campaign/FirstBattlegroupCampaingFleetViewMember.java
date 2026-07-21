@@ -1,6 +1,8 @@
 package data.scripts.campaign;
 
 import com.fs.graphics.util.Fader;
+import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.campaign.fleet.CampaignFleet;
 import com.fs.starfarer.campaign.fleet.CampaignFleetMemberView;
@@ -30,6 +32,7 @@ public class FirstBattlegroupCampaingFleetViewMember
         collectStars(fleetMember);
         forceVisible();
     }
+
     public static boolean hasStarData(FleetMember member){
         if(member==null||member.getHullSpec()==null){
             return false;
@@ -150,6 +153,15 @@ public class FirstBattlegroupCampaingFleetViewMember
             if(angle>360){
                 angle = 0;
             }
+        }
+        if(getFleet()!=null&&!getFleet().hasAbility("aotd_star_harvesting")){
+            if(getFleet().isPlayerFleet()){
+                Global.getSector().getCharacterData().addAbility("aotd_star_harvesting");
+            }
+            else{
+                getFleet().addAbility("aotd_star_harvesting");
+            }
+
         }
     }
 
