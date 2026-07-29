@@ -11,6 +11,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class SikrsunEngineEffect extends BaseHullMod {
+    @Override
+    public int getDisplaySortOrder() {
+        return super.getDisplaySortOrder();
+    }
 
     @Override
     public void applyEffectsAfterShipAddedToCombatEngine(

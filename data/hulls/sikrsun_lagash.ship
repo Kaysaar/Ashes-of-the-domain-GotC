@@ -11,6 +11,9 @@
   "shieldCenter": [0, 0],
   "shieldRadius": 225.5,
   "viewOffset": 0,
+  "builtInMods": [
+    "aotd_first_battlegroup"
+  ],
   "builtInWeapons": {
     "WS0012": "sikrsun_moon_yellow",
     "WS0013": "sikrsun_moon_yellow",

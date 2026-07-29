@@ -2,6 +2,7 @@ package data.scripts.campaign;
 
 import com.fs.graphics.util.Fader;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
 import com.fs.starfarer.campaign.fleet.CampaignFleet;
@@ -34,22 +35,28 @@ public class FirstBattlegroupCampaingFleetViewMember
     }
 
     public static boolean hasStarData(FleetMember member){
-        if(member==null||member.getHullSpec()==null){
+        if(member instanceof FleetMemberAPI){
+            if(member==null||member.getHullSpec()==null){
+                return false;
+            }
+
+            if(StarCombatRenderingManager.getDataFromList(
+                    member.getHullId()
+            )!=null){
+                return true;
+            }
+
+            String baseHullId = member.getHullSpec().getBaseHullId();
+
+            return baseHullId!=null
+                    &&StarCombatRenderingManager.getDataFromList(
+                    baseHullId
+            )!=null;
+        }
+        else{
             return false;
         }
 
-        if(StarCombatRenderingManager.getDataFromList(
-                member.getHullId()
-        )!=null){
-            return true;
-        }
-
-        String baseHullId = member.getHullSpec().getBaseHullId();
-
-        return baseHullId!=null
-                &&StarCombatRenderingManager.getDataFromList(
-                baseHullId
-        )!=null;
     }
     public void collectStars(FleetMember fleetMember){
         if(stars==null)stars = new ArrayList<>();

@@ -12,6 +12,7 @@
   "shieldRadius": 261,
   "viewOffset": 0,
   "builtInMods": [
+    "aotd_first_battlegroup",
     "sikrsun_EngineEffect"
   ],
   "builtInWeapons": {
