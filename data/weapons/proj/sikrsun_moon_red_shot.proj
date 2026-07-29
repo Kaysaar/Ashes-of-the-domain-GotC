@@ -1,0 +1,42 @@
+{
+	"id":"sikrsun_moon_red_shot",
+	"specClass":"missile",	
+	"missileType":"MISSILE",
+	"collisionClass":"MISSILE_NO_FF",
+	"sprite":"graphics/missiles/rift_torpedo.png",
+	"size":[14,16],	
+	"center":[7,8],
+	"collisionRadius":20,
+	"fadeTime":0.5,
+	#"hitGlowRadius":38,
+	"fringeColor":[0,0,255,255],
+	"coreColor":[255,100,100,255],
+	"passThroughMissiles":true,	
+	"passThroughFighters":true,	
+	"glowColor":[255,100,100,75],
+	"glowRadius":125,
+	"engineSpec":{"turnAcc":210,
+				  "turnRate":70,
+				  "acc":250,
+				  "dec":100},
+	"engineSlots":[{"id":"ES1",
+					"loc":[-13, 0],
+				    #"style":"MISSILE_HIGH_TECH",
+				    "style":"CUSTOM",
+					"styleSpec":{
+						"mode":"QUAD_STRIP", # PARTICLES or QUAD_STRIP, determines which params are used
+						"engineColor":[255,100,100,75],
+						"contrailDuration":1,
+						"contrailWidthMult":1,
+						"contrailWidthAddedFractionAtEnd":2.5,  # can be negative. makes trail spread out/narrow at the end
+						"contrailMinSeg":5, # min segment length, in pixels
+						"contrailMaxSpeedMult":0.5f,
+						"contrailAngularVelocityMult":0.5f,
+						"contrailColor":[255,100,100,75],
+						"type":"SMOKE" # GLOW or SMOKE; additive or regular blend mode
+					},
+				    "width":10.0,
+				    "length":0.0,
+				    "angle":180.0},
+				    ]
+}
