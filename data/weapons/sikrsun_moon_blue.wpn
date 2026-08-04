@@ -1,0 +1,85 @@
+{
+  "id": "sikrsun_moon_blue",
+  "specClass": "projectile",
+  "projectileSpecId": "sikrsun_moon_blue_shot",
+  "type": "ENERGY",
+  "size": "LARGE",
+  "turretSprite": "graphics/weapons/sikrsun_moon_t_base.png",
+  "turretGlowSprite": "graphics/weapons/sikrsun_moon_t_glow.png",
+  "hardpointSprite": "graphics/weapons/sikrsun_moon_t_base.png",
+  "hardpointGlowSprite": "graphics/weapons/sikrsun_moon_t_glow.png",
+  "glowColor": [
+    255,
+    100,
+    150,
+    255
+  ],
+  "turretOffsets": [
+    4,
+    0,
+    4,
+    0,
+    4,
+    -0,
+    4,
+    1,
+    4,
+    -1,
+    3.5,
+    1.5,
+    3.5,
+    -1.5,
+    4,
+    0.5,
+    4,
+    -0.5,
+    4,
+    1,
+    4,
+    -1,
+    3.5,
+    1.5,
+    3.5,
+    -1.5
+  ],
+  "turretAngleOffsets": [
+    0,
+    2,
+    -2,
+    4,
+    -4,
+    6,
+    -6,
+    5,
+    -5,
+    9.5,
+    -9.5,
+    7,
+    -7
+  ],
+  "hardpointOffsets": [
+    9,
+    0
+  ],
+  "hardpointAngleOffsets": [
+    0
+  ],
+  "barrelMode": "LINKED",
+  "animationType": "GLOW_AND_FLASH",
+  "autocharge": true,
+  "muzzleFlashSpec": {
+    "length": 33,
+    "spread": 15,
+    "particleSizeMin": 15,
+    "particleSizeRange": 17,
+    "particleDuration": 0.12,
+    "particleCount": 7,
+    "particleColor": [
+      100,
+      200,
+      255,
+      255
+    ]
+  },
+  "fireSoundTwo": "ion_pulser_fire"
+}
