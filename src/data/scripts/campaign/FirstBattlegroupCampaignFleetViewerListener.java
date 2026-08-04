@@ -1,13 +1,15 @@
 package data.scripts.campaign;
 
 import ashlib.data.scripts.CustomCampaignViewerListener;
+import com.fs.starfarer.api.campaign.CampaignFleetAPI;
+import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.campaign.fleet.CampaignFleet;
 import com.fs.starfarer.campaign.fleet.CampaignFleetMemberView;
 import com.fs.starfarer.campaign.fleet.FleetMember;
 
 public class FirstBattlegroupCampaignFleetViewerListener implements CustomCampaignViewerListener {
     @Override
-    public CampaignFleetMemberView generateCampaignFleetViewer(CampaignFleet campaignFleet, FleetMember fleetMember) {
+    public CampaignFleetMemberView generateCampaignFleetViewer(CampaignFleetAPI campaignFleet, FleetMemberAPI fleetMember) {
         if(FirstBattlegroupCampaingFleetViewMember.hasStarData(fleetMember)){
             return new FirstBattlegroupCampaingFleetViewMember(campaignFleet, fleetMember);
         }

@@ -2,6 +2,7 @@ package data.scripts.campaign;
 
 import com.fs.graphics.util.Fader;
 import com.fs.starfarer.api.Global;
+import com.fs.starfarer.api.campaign.CampaignFleetAPI;
 import com.fs.starfarer.api.fleet.FleetMemberAPI;
 import com.fs.starfarer.api.impl.campaign.ids.Abilities;
 import com.fs.starfarer.api.loading.WeaponSlotAPI;
@@ -25,40 +26,34 @@ public class FirstBattlegroupCampaingFleetViewMember
     float angle = 0f;
 
     public FirstBattlegroupCampaingFleetViewMember(
-            CampaignFleet campaignFleet,
-            FleetMember fleetMember
+            CampaignFleetAPI campaignFleet,
+            FleetMemberAPI fleetMember
     ) {
-        super(campaignFleet,fleetMember);
+        super((CampaignFleet) campaignFleet, (FleetMember) fleetMember);
 
         collectStars(fleetMember);
         forceVisible();
     }
 
-    public static boolean hasStarData(FleetMember member){
-        if(member instanceof FleetMemberAPI){
-            if(member==null||member.getHullSpec()==null){
-                return false;
-            }
-
-            if(StarCombatRenderingManager.getDataFromList(
-                    member.getHullId()
-            )!=null){
-                return true;
-            }
-
-            String baseHullId = member.getHullSpec().getBaseHullId();
-
-            return baseHullId!=null
-                    &&StarCombatRenderingManager.getDataFromList(
-                    baseHullId
-            )!=null;
-        }
-        else{
+    public static boolean hasStarData(FleetMemberAPI member){
+        if(member==null||member.getHullSpec()==null){
             return false;
         }
 
+        if(StarCombatRenderingManager.getDataFromList(
+                member.getHullId()
+        )!=null){
+            return true;
+        }
+
+        String baseHullId = member.getHullSpec().getBaseHullId();
+
+        return baseHullId!=null
+                &&StarCombatRenderingManager.getDataFromList(
+                baseHullId
+        )!=null;
     }
-    public void collectStars(FleetMember fleetMember){
+    public void collectStars(FleetMemberAPI fleetMember){
         if(stars==null)stars = new ArrayList<>();
         stars.clear();
 
